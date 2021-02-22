@@ -1,0 +1,81 @@
+
+  <ngx-spinner [name]="spinner1" [fullScreen]="false" type="ball-clip-rotate-pulse" size="medium"></ngx-spinner>
+  <section class="multi_step_form">  
+    <form id="msform"> 
+      <!-- Tittle -->
+      <div class="tittle">
+        <h2>Creación de campañas</h2>
+        <p>Para poder crear la campaña, tiene que seguir los pasos correctamente.</p>
+      </div>
+      <!-- progressbar -->
+      <ul id="progressbar">
+        <li [ngClass]="{'active': step === 2 || step === 1 || step === 3}" >Compruebe los parámetros necesarios</li>  
+        <li [ngClass]="{'active': step === 2 || step === 3}" >Campaña</li> 
+        <li [ngClass]="{'active': step === 3}" >Información</li>
+      </ul>
+      <app-campania-frm [campania]="campania" [step]="step" [contactos]="contactos" [intereses]="intereses" [canales]="canales"></app-campania-frm>
+      
+    
+  <div class="row justify-content-center">
+    <div class="align-self-center">
+      <button *ngIf="step==3 || step== 2" type="button" (click)="back()" class="action-button previous previous_button">Volver</button> 
+    <button *ngIf="step==1 || step== 2" type="button" class="next action-button" [disabled]="!isValidForm()"  (click)="next()">Continuar</button>  
+    <button *ngIf="step==3" type="button" class="action-button">Ejecutar</button> <br>
+    <a *ngIf="step==3" href="javascript:" type="button" (click)="onSubmit()">Guardar</a>
+    </div>
+    
+  </div>
+
+</form>  
+    
+</section> 
+  
+
+<!-- <lib-stepperProgressBar  [controller]="progressStepper" [steps]="steps"></lib-stepperProgressBar> -->
+
+
+<!-- <h6>We will send you a SMS. Input the code to verify.</h6> 
+        <div class="form-row"> 
+          <div class="form-group col-md-6">  
+            <input type="tel" id="phone" class="form-control" placeholder="+880"> 
+          </div>  
+          <div class="form-group col-md-6"> 
+            <input type="text" class="form-control" placeholder="+8801123456789">
+          </div> 
+        </div> 
+        <div class="done_text"> 
+          <a href="#" class="don_icon"><i class="ion-android-done"></i></a> 
+          <h6>A secret code is sent to your phone. <br>Please enter it here.</h6> 
+        </div>  
+        <div class="code_group"> 
+          <input type="text" class="form-control" placeholder="0">
+          <input type="text" class="form-control" placeholder="0">
+          <input type="text" class="form-control" placeholder="0">
+          <input type="text" class="form-control" placeholder="0">
+        </div>   -->
+        <!-- <button type="button" class="action-button previous_button">Volver</button> -->
+        <!-- <button type="button" class="next action-button" [disabled]="!isValidForm()" (click)="next()">Continuar</button>   -->
+<!-- <h6>Please update your account with security questions</h6> 
+        <div class="form-group"> 
+          <select class="product_select">
+            <option data-display="1. Choose A Question">1. Choose A Question</option> 
+            <option>2. Choose A Question</option>
+            <option>3. Choose A Question</option> 
+          </select>
+        </div> 
+        <div class="form-group fg_2"> 
+          <input type="text" class="form-control" placeholder="Anwser here:">
+        </div> 
+        <div class="form-group"> 
+          <select class="product_select">
+            <option data-display="1. Choose A Question">1. Choose A Question</option> 
+            <option>2. Choose A Question</option>
+            <option>3. Choose A Question</option> 
+          </select>
+        </div> 
+        <div class="form-group fg_3"> 
+          <input type="text" class="form-control" placeholder="Anwser here:">
+        </div>  -->
+        
+        
+        <!-- <a href="#" class="action-button">Ejecutar</a>  -->

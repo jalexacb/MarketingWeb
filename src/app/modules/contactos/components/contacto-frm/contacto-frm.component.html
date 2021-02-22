@@ -1,0 +1,56 @@
+<form action="javascript:"  class="was-validated">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputPassword4">Nombres</label>
+            <input type="text" class="form-control" name="nombre" required [(ngModel)]="contacto.nombres" id="inputPassword4" placeholder="Nombres">
+            <div class="valid-feedback">Válido.</div>
+            <div class="invalid-feedback">Campo obligatorio.</div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputPassword4">Apellidos</label>
+            <input type="text" class="form-control" name="apellidos" required [(ngModel)]="contacto.apellidos" id="inputPassword4" placeholder="Apellidos">
+            <div class="valid-feedback">Válido.</div>
+            <div class="invalid-feedback">Campo obligatorio.</div>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputPassword4">Celular</label>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputPassword4">Email</label>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            
+           
+			<!-- <ngx-intl-tel-input  [cssClass]="'form-control'"
+				[preferredCountries]="preferredCountries"
+				[enableAutoCountrySelect]="true"
+				[enablePlaceholder]="true"
+				[searchCountryFlag]="true"
+				[searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+				[selectFirstCountry]="false"
+				[selectedCountryISO]="CountryISO.Ecuador"
+				[maxLength]="15"
+				[tooltipField]="TooltipLabel.Name"
+				[separateDialCode]="false"
+                name="phone"
+                [phoneValidation]="true"
+                >
+            </ngx-intl-tel-input> -->
+            <input type="text" ng2TelInput [(ngModel)]="contacto.celular" name="celular" [ng2TelInputOptions]="{initialCountry: 'ec'}" class="form-control" required/>
+           
+            <div class="valid-feedback">Válido.</div>
+            <div class="invalid-feedback">Campo obligatorio.</div>
+        </div>
+        <div class="form-group col-md-6">
+            <!-- <label for="inputPassword4">Email</label> -->
+            <input type="text" class="form-control" name="correo" required [(ngModel)]="contacto.correo" id="inputPassword4" placeholder="Nombre">
+            <div class="valid-feedback">Válido.</div>
+            <div class="invalid-feedback">Campo obligatorio.</div>
+        </div>
+    </div>
+</form>

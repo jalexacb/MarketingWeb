@@ -1,0 +1,61 @@
+<h5>Campañas</h5>
+<div class="row">
+    <div class="col-sm-3">
+        <label for="">Nombre:</label>
+        <input type="text" [(ngModel)]="campania.name" class="form-control">
+    </div>
+   
+
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <label for="">Categorías</label>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" value="Smartphones" (change)="onChangeCategoria($event)" id="exampleCheck1"> 
+            <label class="form-check-label" for="exampleCheck1">Smartphones</label>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" value="Computadoras" (change)="onChangeCategoria($event)" id="exampleCheck2"> 
+            <label class="form-check-label" for="exampleCheck2">Computadoras</label>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" value="Tecnología" (change)="onChangeCategoria($event)" id="exampleCheck3"> 
+            <label class="form-check-label" for="exampleCheck3">Tecnología</label>
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" value="Maquillaje" (change)="onChangeCategoria($event)" id="exampleCheck4"> 
+            <label class="form-check-label" for="exampleCheck4">Maquillaje</label>
+        </div>
+        
+        <!-- <input type="checkbox" class="form-check-input" value="Computadores" id="exampleCheck1"> Computadoras
+        <input type="checkbox" class="form-check-input" value="E-commerce" id="exampleCheck1"> Tecnología
+        <input type="checkbox" class="form-check-input" value="Maquillaje" id="exampleCheck1"> Maquillaje -->
+    </div>
+   
+
+</div>
+<div class="row">
+    <div class="col-sm-3">
+        <label for="">Para:</label>
+        <input type="text" [(ngModel)]="campania.to" class="form-control" placeholder="+593...">
+    </div>
+    <div class="col-sm-6">
+       <label for="">Estado:  </label>
+       <label for="">{{status}}</label>
+    </div>
+</div>
+<div class="row"> 
+    <div class="col-sm-3">
+      <div id="main-search" class="main-search open">
+        <label for="">Mensaje: </label>
+        <!-- <textarea class="form-control" [(ngModel)]="campania.body" name="" id="" cols="30" rows="10"></textarea> -->
+        <textarea [froalaEditor]="froala_options" class="form-control" [(ngModel)]="campania.body" name="" id="" cols="30" rows="10"></textarea>
+      </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 mb-5">
+        <button type="button" class="btn btn-primary" (click)="sendMessage()" ngbTooltip="btn-primary">Enviar campaña</button>
+    </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="bg-image">
+  <div class="login-reg-panel">
+    
+    <div class="login-info-box">
+      <h2>Have an account?</h2>
+      <p>Lorem ipsum dolor sit amet</p>
+      <label id="label-register" for="log-reg-show">Login</label>
+      <input type="radio" name="active-log-panel" id="log-reg-show"  checked="checked">
+    </div>
+              
+    <div class="register-info-box">
+      <img src="assets/images/logo-white.png" alt="" class="img-fluid mb-4">
+      <p>Lorem ipsum dolor sit amet</p>
+      <!-- <label id="label-login" for="log-login-show">Register</label> -->
+      <input type="radio" name="active-log-panel" id="log-login-show">
+    </div>
+              
+    <div class="white-panel">
+
+      <div class="login d-flex align-items-center py-5">
+        <div class="container">
+          <!-- <div class="card"> -->
+            <div class="row align-items-center text-center">
+              <div class="col-md-12">
+                <div class="card-body">
+                  
+                  <h4 class="mb-3 f-w-400">¡Bienvenido/a!</h4>
+                  <form #geeksForm="ngForm" 
+                    (keydown)="EnterSubmit($event, geeksForm.form)"
+                    (ngSubmit)="onSubmit(geeksForm.form);">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="feather icon-user"></i></span>
+                      </div>
+                      <input type="text" class="form-control" name="usuario" [(ngModel)]="usuario.usuario" placeholder="Usuario">
+                    </div>
+                    <div class="input-group mb-4">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="feather icon-lock"></i></span>
+                      </div>
+                      <input type="password" class="form-control" name="password" [(ngModel)]="usuario.password" placeholder="Contraseña">
+                    </div>
+                    <!-- <div class="form-group text-left mt-2">
+                      <div class="checkbox checkbox-primary d-inline">
+                        <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" checked="">
+                        <label for="checkbox-fill-a1" class="cr"> Recordar sesión</label>
+                      </div>
+                    </div> -->
+                    <app-alert type="danger"  dismiss="true" *ngIf="is_bloqueado">Ha superado el límite de intentos. Para proteger sus datos, ha sido bloqueado. Inténtelo más tarde.</app-alert>
+                    <app-alert type="danger"  dismiss="true" *ngIf="is_advertencia">Error en el inicio de sesión</app-alert>
+                    <button class="btn btn-block btn-primary mb-4">Iniciar sesión</button>
+                  </form>
+                  <!-- <p class="mb-2 text-muted">Forgot password? <a [routerLink]="['/auth/reset-password']" class="f-w-400">Reset</a></p>
+                  <p class="mb-0 text-muted">Don’t have an account? <a [routerLink]="['/auth/signup']" class="f-w-400">Signup</a></p> -->
+                </div>
+              </div>
+            </div>
+          <!-- </div> -->
+        </div>
+      </div>
+    
+    </div>
+  </div>
+</div>
+<!-- <div class="auth-wrapper">
+  <div class="auth-content">
+    <div class="card">
+      <div class="row align-items-center text-center">
+        <div class="col-md-12">
+          <div class="card-body">
+            <img src="assets/images/logo-dark.png" alt="" class="img-fluid mb-4">
+            <h4 class="mb-3 f-w-400">Signin</h4>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="feather icon-user"></i></span>
+              </div>
+              <input type="email" class="form-control" placeholder="Usuario">
+            </div>
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="feather icon-lock"></i></span>
+              </div>
+              <input type="password" class="form-control" placeholder="Password">
+            </div>
+            <div class="form-group text-left mt-2">
+              <div class="checkbox checkbox-primary d-inline">
+                <input type="checkbox" name="checkbox-fill-1" id="checkbox-fill-a1" checked="">
+                <label for="checkbox-fill-a1" class="cr"> Save credentials</label>
+              </div>
+            </div>
+            <button class="btn btn-block btn-primary mb-4">Signin</button>
+            <p class="mb-2 text-muted">Forgot password? <a [routerLink]="['/auth/reset-password']" class="f-w-400">Reset</a></p>
+            <p class="mb-0 text-muted">Don’t have an account? <a [routerLink]="['/auth/signup']" class="f-w-400">Signup</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

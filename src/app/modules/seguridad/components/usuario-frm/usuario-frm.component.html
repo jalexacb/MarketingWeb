@@ -1,0 +1,88 @@
+<form action="javascript:"  class="was-validated">
+    <div class="form-row">
+      <div class="col-sm-5">
+        <div class="form-row">
+          <div class="col-sm-12">
+            <img class="img-fluid rounded mx-auto d-block" [src]="usuario.path_logo?usuario.path_logo:'assets/images/user/no-user-icon.png'" title="usuario" width="70%" height="80%"> 
+            <br>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-sm-12">
+            <div class="input-group">
+              <div class="custom-file">
+                <input type='file'  class="custom-file-input" id="customFileLang" lang="es" (change)="readUrl($event);" />
+                <label class="custom-file-label" for="customFileLang">{{nombre_archivo?nombre_archivo:'Seleccionar archivo'}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-7">
+        
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Usuario</label>
+              <div class="form-control">{{getUsuario()?getUsuario():'Usuario'}}</div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Contraseña</label>
+              <div class="input-group">
+                <input type="password" class="form-control" #password required [(ngModel)]="usuario.password" name="password" placeholder="Contraseña">
+                <div class="input-group-append">
+                  <span class="input-group-text" (click)="onClick(password)"><i class="feather" [ngClass]="{'icon-eye': password.type=='password', 'icon-eye-off': password.type=='text'}"></i></span>
+                </div>
+                <div class="valid-feedback">Válido.</div>
+              <div class="invalid-feedback">Campo obligatorio.</div>
+              </div>
+              
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Apellidos</label>
+              <input type="text" class="form-control" name="apellidos" required [(ngModel)]="usuario.apellidos" id="inputPassword4" placeholder="Apellidos">
+              <div class="valid-feedback">Válido.</div>
+              <div class="invalid-feedback">Campo obligatorio.</div>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Nombres</label>
+              <input type="text" class="form-control" id="inputEmail4" required name="nombres" [(ngModel)]="usuario.nombres" placeholder="Nombre completo">
+              <div class="valid-feedback">Válido.</div>
+              <div class="invalid-feedback">Campo obligatorio.</div>
+            </div>
+            
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="">Sexo</label>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="customRadio1" name="customRadio" required name="sexo" value="F" [(ngModel)]="usuario.sexo" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio1" >Femenino</label>
+                
+              </div>
+              <div class="custom-control custom-radio">
+                <input type="radio" id="customRadio2" name="customRadio" require name="sexo" value="M" [(ngModel)]="usuario.sexo" class="custom-control-input">
+                <label class="custom-control-label" for="customRadio2" >Masculino</label>
+               
+              </div>
+              <div class="valid-feedback">Válido.</div>
+              <div class="invalid-feedback">Campo obligatorio.</div>
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputState">Rol</label>
+              <select id="inputState" class="form-control" name="rol" required [(ngModel)]="usuario.rol_id"> 
+                <option *ngFor="let rol of roles"  [value]="rol.id">{{rol.nombre}}</option> 
+              </select>
+              <div class="valid-feedback">Válido.</div>
+              <div class="invalid-feedback">Campo obligatorio.</div>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </form>
+
+

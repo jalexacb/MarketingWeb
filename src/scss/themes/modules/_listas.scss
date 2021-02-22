@@ -1,0 +1,64 @@
+/**  =====================
+      Pages Listas css start
+==========================  **/
+
+
+
+.danger-table {
+    // background-color: #ffb291;
+    background-color: #F2BDC7;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+
+
+.main-search {
+    .input-group {
+        border-radius: 5px;
+        // padding: 0;
+        box-shadow: 0 1px 3px 0 rgba(54, 80, 138, 0.30);
+        .form-control,
+        .input-group-text {
+            background: white;
+            border: transparent;
+            
+            padding: 8px;
+            height: auto;
+            
+        }
+
+        .search-close {
+            display: none;
+        }
+
+        .search-btn {
+            padding: 0;
+            background: transparent;
+            // border-color: transparent;
+            box-shadow: none;
+            margin-bottom: 0;
+            margin-right: 0;
+        }
+
+        .form-control {
+            transition: all 0.3s ease-in-out;
+            // width: 0;
+            font-size: 14px;
+        }
+
+        .form-control,
+        .search-btn {
+            &:active,
+            &:focus,
+            &:hover {
+                outline: none;
+                box-shadow: none;
+            }
+        }
+    }
+
+}
+   

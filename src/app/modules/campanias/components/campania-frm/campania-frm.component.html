@@ -1,0 +1,189 @@
+
+<!-- fieldsets -->
+        <fieldset *ngIf="step === 1" >
+            <h3>Complete los parámetros necesarios</h3>
+            <br>
+            <div class="row">
+            <div class="col-sm-2">
+                <img *ngIf="canales.length > 0" src="/assets/images/campanias/checked1.png" width="30px" height="30px" class="img-fluid rounded mx-auto d-block" alt="">
+                
+            </div>
+            <div class="col-sm-10 text-left">
+                <label for="">Ingrese canales de publicidad</label><br>
+                <small class="text-danger" *ngIf="canales.length === 0">* No existen canales creados.</small> 
+                <!-- <small class="text-danger" *ngIf=".length === 0"> No tiene permisos para crear canales.</small> -->
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-sm-2">
+                <img *ngIf="intereses.length > 0" src="/assets/images/campanias/checked1.png" width="30px" height="30px" class="img-fluid rounded mx-auto d-block" alt="">
+                
+            </div>
+            <div class="col-sm-10 text-left">
+                <label for="">Ingrese al menos un interés de publicidad</label><br>
+                <small class="text-danger" *ngIf="intereses.length === 0">* No existen intereses creados.</small> 
+                <!-- <small class="text-danger" *ngIf=".length === 0"> No tiene permisos para crear intereses.</small> -->
+            </div>
+            </div>
+            <hr>
+            <div class="row">
+            <div class="col-sm-2">
+                <img *ngIf="contactos.length > 0" src="/assets/images/campanias/checked1.png" width="30px" height="30px" class="img-fluid rounded mx-auto d-block" alt="">
+                
+            </div>
+            <div class="col-sm-10 text-left">
+                <label for="">Ingrese al menos un contacto de publicidad</label><br>
+                <small class="text-danger" *ngIf="contactos.length === 0">* No existen contactos creados.</small> 
+                <!-- <small class="text-danger" *ngIf=".length === 0"> No tiene permisos para crear contactos.</small> -->
+            </div>
+            </div>
+            <br>
+            
+        </fieldset>
+        <fieldset *ngIf="step === 2" >
+            <h3>Campaña</h3>
+            <form action="" class="was-validated">
+            <div class="row text-center">
+                <div class="col-sm-12 mr-auto ">
+                <label for="inputPassword4">Nombre de la campaña</label>
+                <input type="text" class="form-control" name="apellidos" [(ngModel)]="campania.nombre" required id="inputPassword4" placeholder="Nombre de la campaña">
+                <div class="valid-feedback">Válido.</div>
+                <div class="invalid-feedback">Campo obligatorio.</div>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-6">
+                <label for="inputPassword4">Canal/es</label>
+                <ng-multiselect-dropdown
+                    [placeholder]="'Canales'"
+                    [data]="canales"
+                    [(ngModel)]="campania.canales"
+                    name="canales"
+                    [settings]="settingsSelect"
+                    (onSelect)="onItemSelect($event)"
+                    (onSelectAll)="onSelectAll($event)"
+                    required
+                >
+                </ng-multiselect-dropdown>
+                <small *ngIf="campania.canales.length>0" class="text-success">Válido.</small>
+                <small *ngIf="campania.canales.length===0" class="text-danger">Campo obligatorio.</small>
+                </div>
+                <div class="col-sm-6">
+                <label for="inputPassword4">Interés</label>
+                <ng-multiselect-dropdown
+                [placeholder]="'Intereses'"
+                [data]="intereses"
+                [(ngModel)]="campania.intereses"
+                name="intereses"
+                [settings]="settingsSelect"
+                (onSelect)="onItemSelect($event)"
+                (onSelectAll)="onSelectAll($event)"
+                required
+                >
+                </ng-multiselect-dropdown>
+                <small *ngIf="campania.intereses.length>0" class="text-success">Válido.</small>
+                <small *ngIf="campania.intereses.length===0" class="text-danger">Campo obligatorio.</small>
+                </div>
+            </div>
+            <br>
+            <div class="row" *ngIf="campania.intereses.length > 0">
+                <div class="col-sm-12">
+                <label for="inputPassword4">Contactos</label>
+                </div>
+            </div>
+            <div class="row" *ngIf="campania.intereses.length > 0">
+                <div class="col-sm-6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th><input type="checkbox" name="isSelectedAll" [(ngModel)]="isSelectedAll" id="exampleCheck1" (change)="addAllContacto()"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="text-left" *ngFor="let contacto of contactos; let i = index;">
+                        <th scope="row"> {{i+1}}</th>
+                        <td>{{contacto.nombres + ' ' + contacto.apellidos }} <small class="text-success" *ngIf="contacto.recomendado">Contacto recomendado</small></td>
+                        <td><input type="checkbox"  id="exampleCheck1" [(ngModel)]="contacto.seleccionado" [ngModelOptions]="{standalone: true}" (change)="addContacto(contacto, i)"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+                <div class="col-sm-6">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Celular</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="text-left" *ngFor="let contacto of campania.contactos; let i=index;">
+                        <th scope="row">1</th>
+                        <td>{{contacto.nombres + ' ' + contacto.apellidos}}</td>
+                        <td>{{ contacto.celular }}</td>
+                    </tr>
+                    
+                    <tr *ngIf="campania.contactos.length === 0"><td colspan="11" class="text-danger">* No hay recomendaciones.</td></tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+            </form>
+        </fieldset>  
+        <fieldset *ngIf="step === 3" >
+            <h3>Información</h3>
+            <div class="row">
+                <div class="col-sm-6">
+                <div class="row text-left">
+                    <div class="col-sm-12">
+                    <label>Multimedia (opcional)</label>
+                    <!-- <div class="input-group"> -->
+                        <div class="custom-file">
+                        <input type='file'  class="custom-file-input" id="customFileLang" lang="es" (change)="readUrl($event);" />
+                        <label class="custom-file-label" for="customFileLang">{{campania.nombre_archivo?campania.nombre_archivo:'Seleccionar archivo'}}</label>
+                        </div>
+                    <!-- </div> -->
+                    </div>
+                </div>
+                <div class="row text-left">
+                    <div class="col-sm-12">
+                    <label>Enlace externo (opcional)</label>
+                    <input type="text" class="form-control" [(ngModel)]="campania.url" name="link">
+                    <small *ngIf="verificarURL()" class="text-success">Válido.</small>
+                    <small *ngIf="!verificarURL() && this.campania.url !=''" class="text-danger">Url no válido.</small>
+                    </div>
+                    
+                </div>
+                <div class="row text-left">
+                    <div class="col-sm-12">
+                    <label>Mensaje</label>
+                    
+                    <textarea class="overflow-auto" required [froalaEditor]="froala_options" name="content" #content="ngModel" [(ngModel)]="campania.mensaje"></textarea>
+                    <small *ngIf="campania.mensaje != ''" class="text-success">Válido.</small>
+                    <small *ngIf="campania.mensaje == ''" class="text-danger">Campo obligatorio.</small>
+                    </div>
+                    
+                </div>
+                </div>
+                <div class="col-sm-6">
+                <div class="parent">
+                    <img class="image1" src="/assets/images/campanias/cellphone.jpg" />
+                    
+                    <div class="pantalla">
+                        
+                    <div class="mensaje text-left" *ngIf="campania.mensaje != '' || campania.nombre_archivo != '' || campania.url != ''" id="msg" ><img class="img-fluid rounded mx-auto d-block image" *ngIf="campania.url_media" [src]="campania.url_media" title="path" width="70%" height="80%"> <small [innerHTML]="campania.mensaje">{{campania.mensaje.trim()}} </small> <a [href]="campania.url"><strong>{{campania.url}}</strong></a></div>
+                    
+                    </div>
+                    
+                </div>  
+                </div>
+            
+            </div>
+            
+        </fieldset> 
+

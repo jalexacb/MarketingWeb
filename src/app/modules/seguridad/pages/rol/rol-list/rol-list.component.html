@@ -1,0 +1,67 @@
+<ngx-spinner type = "ball-clip-rotate-pulse"></ngx-spinner>
+<h5>Roles</h5>
+<div class="row"> 
+  <div class="col-md-4">
+    <div id="main-search" class="main-search open">
+      
+      <div class="input-group">
+        <span class="input-group-prepend" >
+          <i class="feather icon-search input-group-text"></i>
+        </span>
+        <input type="text" id="m-search" class="form-control" name="busqueda" [(ngModel)]="busqueda" (keyup.backspace)="onKeyBackSpace($event)" (keyup)="onSearch()" placeholder=" Búsqueda . . ." [style.width]="'50px'">
+        
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 ml-auto">
+    <button type="button" class="btn btn-primary" (click)="onCreate()" ngbTooltip="btn-primary">Crear Rol</button>
+  </div>
+</div>
+      
+<br>
+
+<div class="row">
+    <div class="col-sm-12">
+      <app-card [options]="false" [hidHeader]="true">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" sortable="nombre" >Nombre</th>
+            <th scope="col" sortable="status" >Estado</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let rol of roles; let i = index;"
+              [ngClass]="{'danger-table': rol.status === 'I'}"
+          >
+            <th scope="row">{{ i+1 }}</th>
+            <td>
+              {{rol.nombre}}
+            </td>
+            <!-- <td><span class="badge m-r-5 badge-pill badge-info">{{  rol.nombre }}</span></td> -->
+            <td>{{rol.status=='A' ? 'Activo' : 'Inactivo'}}</td>
+            <td>
+              <div class="btn-group mb-2 mr-2" ngbDropdown [placement]="'bottom-right'">
+                  <button class="btn btn-icon" ngbDropdownToggle type="button"><i class="icon feather icon-more-vertical"></i></button>
+                  <div ngbDropdownMenu>
+                    <a class="dropdown-item" type="button" (click)="onEdit(rol)" href="javascript:"><i class="icon feather icon-edit"></i> Editar</a>
+                    <a *ngIf="rol.status === 'A'" class="dropdown-item" type="button" (click)="onDelete(rol)" href="javascript:"><i class="icon feather icon-trash"></i> Eliminar</a>
+                    <a *ngIf="rol.status === 'I'" class="dropdown-item" type="button" (click)="onActivar(rol)" href="javascript:"><i class="icon feather icon-check-square"></i> Activar</a>
+                  </div>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </app-card>
+    </div>
+
+</div>
+
+<div style="float: right;">
+  
+  <ngb-pagination [collectionSize]="collectionSize"  (pageChange)="onChangePage($event)" [(page)]="advancePage" [maxSize]="3" [pageSize]="per_page" [boundaryLinks]="true"></ngb-pagination>
+  
+</div>
