@@ -54,7 +54,7 @@ export class ContactoListComponent implements OnInit {
     this.per_page = 5;
     this.contactos_xml = [];
   }
-  
+
   onFileChange(evt: any) {
     /* wire up file reader */
     const target: DataTransfer = <DataTransfer>evt.target;
