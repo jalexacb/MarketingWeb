@@ -29,8 +29,11 @@ export class ContactoListComponent implements OnInit {
   public currentPage: number;
   public permiso: Permiso;
   separateDialCode = false;
+<<<<<<< HEAD
   public contactos_xml: Array<Contacto>;
   data: any = [];
+=======
+>>>>>>> a7261e68f28db44bc3a756424335038e7b0c41be
 	// SearchCountryField = SearchCountryField;
 	// TooltipLabel = TooltipLabel;
 	// CountryISO = CountryISO;

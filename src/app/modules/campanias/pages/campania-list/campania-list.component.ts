@@ -15,7 +15,6 @@ import Swal from 'sweetalert2';
 import { CampaniaEditModalComponent } from '../../modals/campania-edit-modal/campania-edit-modal.component';
 
 
-
 @Component({
   selector: 'app-campania-list',
   templateUrl: './campania-list.component.html',

@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-<<<<<<< HEAD
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-=======
->>>>>>> c484134bcc4f97c939af1ced9cf2b5e053910bbe
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LoginService } from 'src/app/core/services/login.service';
 import { ParametroService } from 'src/app/core/services/parametro.service';
@@ -28,7 +25,6 @@ export class ParametroListComponent implements OnInit {
   public collectionSize: number;
   public per_page: number;
   public currentPage: number;
-<<<<<<< HEAD
   bsModalRef: BsModalRef;
   spinner1 = 'sp_page';
   constructor(
@@ -37,12 +33,6 @@ export class ParametroListComponent implements OnInit {
     // private modalService: NgbModal,
     private spinner: NgxSpinnerService,
     private modalService: BsModalService,
-=======
-  constructor(
-    private spinner: NgxSpinnerService,
-    private parametroService: ParametroService,
-    private modalService: NgbModal,
->>>>>>> c484134bcc4f97c939af1ced9cf2b5e053910bbe
     private loginService: LoginService,
     private permisoService: PermisoService,
   ) {
@@ -56,53 +46,30 @@ export class ParametroListComponent implements OnInit {
    }
 
   ngOnInit() {
-<<<<<<< HEAD
     this.spinner.show(this.spinner1);
-=======
-    this.spinner.show();
->>>>>>> c484134bcc4f97c939af1ced9cf2b5e053910bbe
     let p1 = this.getParametros();
     let p2 = this.getPermiso();
 
     Promise.all([p1, p2])
-<<<<<<< HEAD
       .then(result => this.spinner.hide(this.spinner1))
       .catch(error => this.spinner.hide(this.spinner1));
-=======
-      .then(result => this.spinner.hide())
-      .catch(error => this.spinner.hide());
->>>>>>> c484134bcc4f97c939af1ced9cf2b5e053910bbe
   }
 
   onKeyBackSpace(){
     if(this.busqueda == ''){
-<<<<<<< HEAD
       this.spinner.show(this.spinner1);
       this.getParametros().then(
         res => this.spinner.hide(this.spinner1),
         err => this.spinner.hide(this.spinner1),
-=======
-      this.spinner.show();
-      this.getParametros().then(
-        res => this.spinner.hide(),
-        err => this.spinner.hide(),
->>>>>>> c484134bcc4f97c939af1ced9cf2b5e053910bbe
       );
     }
   }
 
   onSearch(event:any = null){
     let qs = "";
-<<<<<<< HEAD
     this.spinner.show(this.spinner1);
     if(this.busqueda != ''){
       console.log("bus",this.busqueda);
-      
-=======
-    if(this.busqueda != ''){
-      console.log("bus",this.busqueda);
-      this.spinner.show();
->>>>>>> c484134bcc4f97c939af1ced9cf2b5e053910bbe
       qs += `&busqueda=${this.busqueda}`;
       
     }
@@ -111,13 +78,8 @@ export class ParametroListComponent implements OnInit {
     }
 
     this.getParametros(qs).then(
-<<<<<<< HEAD
       res => this.spinner.hide(this.spinner1),
       err => this.spinner.hide(this.spinner1),
-=======
-      res => this.spinner.hide(),
-      err => this.spinner.hide(),
->>>>>>> c484134bcc4f97c939af1ced9cf2b5e053910bbe
     );
   }
 
@@ -135,12 +97,6 @@ export class ParametroListComponent implements OnInit {
           console.log(this.collectionSize);
           // this.advancePage++;
           resolve(true);
-            /** spinner ends after 5 seconds */
-<<<<<<< HEAD
-            // this.spinner.hide(this.spinner1);
-=======
-            // this.spinner.hide();
->>>>>>> c484134bcc4f97c939af1ced9cf2b5e053910bbe
           
         },
         err => {
@@ -161,19 +117,11 @@ export class ParametroListComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-<<<<<<< HEAD
         this.spinner.show(this.spinner1);
         this.parametroService.delete(parametro.id,`?usuario_id=${localStorage.getItem('usuario_id')}`).subscribe(
           (res: Array<any>) => {
             parametro.status = 'A';
             this.spinner.hide(this.spinner1);
-=======
-        this.spinner.show();
-        this.parametroService.delete(parametro.id,`?usuario_id=${localStorage.getItem('usuario_id')}`).subscribe(
-          (res: Array<any>) => {
-            parametro.status = 'A';
-            this.spinner.hide();
->>>>>>> c484134bcc4f97c939af1ced9cf2b5e053910bbe
             Swal.fire(
               '¡Activado!',
               'El parametro ha sido activado',

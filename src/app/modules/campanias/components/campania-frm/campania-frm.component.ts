@@ -160,7 +160,6 @@ export class CampaniaFrmComponent implements OnInit {
     // this.contactos = [];
     // this.intereses = [];
     this.isSelectedAll = false;
-
   }
 
   ngOnInit() {
@@ -181,7 +180,6 @@ export class CampaniaFrmComponent implements OnInit {
         unSelectAllText: 'Deseleccione todo',
         itemsShowLimit: 3,
       };
-
       let intereses = [];
       this.campania.intereses.forEach(interes => {
         intereses.push(interes.nombre);
@@ -352,7 +350,6 @@ export class CampaniaFrmComponent implements OnInit {
     this.contactos.forEach(contacto=>{
       contacto.seleccionado = this.isSelectedAll;
       if(this.isSelectedAll){
-
         this.campania.contactos.push(contacto);
       }
     });
