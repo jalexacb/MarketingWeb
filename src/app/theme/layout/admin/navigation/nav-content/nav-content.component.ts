@@ -37,7 +37,7 @@ export class NavContentComponent implements OnInit, AfterViewInit {
       this.nextConfig = NextConfig.config;
       this.windowWidth = window.innerWidth;
 
-      // this.navigation = this.nav.get();
+      
       this.prevDisabled = 'disabled';
       this.nextDisabled = '';
       this.scrollWidth = 0;
@@ -63,12 +63,6 @@ export class NavContentComponent implements OnInit, AfterViewInit {
   }
 
   getMenus(){
-    // return new Promise((resolve, reject) => {
-    //   this.menuService.getAll().subscribe( res => {
-    //     this.navigation = res;
-    //     console.log(res);
-    //   });
-    // });
     this.spinner.show(this.spinner1);
     return new Promise((resolve, reject) => {
       let qs = "?usuario_id="+localStorage.getItem('usuario_id');
@@ -83,10 +77,10 @@ export class NavContentComponent implements OnInit, AfterViewInit {
           let qs = "?rol_id="+rol_id;
           this.menuService.getAllPermisos(qs).subscribe( res => {
             this.navigation = res;
-            console.log(res);
+            
           });
         }
-        console.log(res);
+        
         this.spinner.hide(this.spinner1);
       });
     });

@@ -33,7 +33,7 @@ export class UsuarioAddModalComponent implements OnInit {
 
   getImage(event){
     this.selectedFile = event;
-    console.log("padre",this.selectedFile);
+    
   }
 
   getExistente(event){
@@ -72,7 +72,7 @@ export class UsuarioAddModalComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.usuario);
+    
     this.spinner.show('sp_usuario_add');
     return new Promise((resolve, reject)=>{
       this.usuarioService.save(this.usuario).subscribe(

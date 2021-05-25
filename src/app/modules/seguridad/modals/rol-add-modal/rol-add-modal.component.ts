@@ -45,7 +45,7 @@ export class RolAddModalComponent implements OnInit {
           'success'
         )
         this.sendRespuesta.emit(true);
-        console.log("Se ha guardado");
+        
         this.spinner.hide('sp_rol_add');
         this.bsModalRef.hide();
       },

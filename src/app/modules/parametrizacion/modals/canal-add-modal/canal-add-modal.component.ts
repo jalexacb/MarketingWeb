@@ -34,7 +34,7 @@ export class CanalAddModalComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.canal);
+    
     this.spinner.show(this.spinner1);
     this.canalService.save(this.canal).subscribe(
       res => {

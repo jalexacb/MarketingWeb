@@ -35,7 +35,7 @@ export class CanalEditModalComponent implements OnInit {
 
   onSubmit(){
     this.spinner.show(this.spinner1);
-    console.log(this.canal);
+    
     this.canalService.update(this.canal).subscribe(
       res => {
         Swal.fire(

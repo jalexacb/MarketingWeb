@@ -7,7 +7,7 @@ import { LoginService } from 'src/app/core/services/login.service';
 import { PermisoService } from 'src/app/core/services/permiso.service';
 import { Contacto } from 'src/app/theme/shared/models/Contacto';
 import { Permiso } from 'src/app/theme/shared/models/Permiso';
-// import { SearchCountryField, TooltipLabel, CountryISO } from 'ngx-intl-tel-input';
+
 
 import Swal from 'sweetalert2'
 import { ContactoAddModalComponent } from '../../modals/contacto-add-modal/contacto-add-modal.component';
@@ -21,7 +21,7 @@ import * as XLSX from 'xlsx';
 })
 export class ContactoListComponent implements OnInit {
   public contactos: Array<Contacto>;
-  // sortedData: Contacto[];
+  
   public busqueda: String;
   public advancePage: number;
   public collectionSize: number;
@@ -31,10 +31,6 @@ export class ContactoListComponent implements OnInit {
   separateDialCode = false;
   public contactos_xml: Array<Contacto>;
   data: any = [];
-	// SearchCountryField = SearchCountryField;
-	// TooltipLabel = TooltipLabel;
-	// CountryISO = CountryISO;
-	// preferredCountries: CountryISO[] = [CountryISO.UnitedStates, CountryISO.UnitedKingdom];
 	phoneForm = new FormGroup({
 		phone: new FormControl(undefined, [Validators.required])
 	});
@@ -48,20 +44,17 @@ export class ContactoListComponent implements OnInit {
     private modalService: NgbModal,
     private loginService: LoginService,
     private permisoService: PermisoService,
-    // private paginatorp: MatPaginatorIntl
+    
   ) { 
     this.contactos = [];
     this.permiso = new Permiso();
     this.busqueda = "";
-    // this.paginatorp.itemsPerPageLabel = ""
+    
     this.advancePage = 1;
     this.per_page = 5;
     this.contactos_xml = [];
   }
-
-  // changePreferredCountries() {
-	// 	this.preferredCountries = [CountryISO.India, CountryISO.Canada];
-  // }
+  
   onFileChange(evt: any) {
     /* wire up file reader */
     const target: DataTransfer = <DataTransfer>evt.target;
@@ -84,7 +77,7 @@ export class ContactoListComponent implements OnInit {
         contacto.celular = element[1];
         this.contactos_xml.push(contacto);
       });
-      console.log(this.contactos_xml);
+      
     };
     reader.readAsBinaryString(target.files[0]);
   }
@@ -113,7 +106,7 @@ export class ContactoListComponent implements OnInit {
     let qs = "";
     this.spinner.show(this.spinner1);
     if(this.busqueda != ''){
-      console.log("bus",this.busqueda);
+      
       
       qs += `&busqueda=${this.busqueda}`;
       
@@ -132,10 +125,10 @@ export class ContactoListComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.contactoService.getAll(`?per_page=${this.per_page}${qs}`).subscribe(
         (res:any) => {
-          console.log(res);
+          
           this.contactos = res.data;
           this.collectionSize = res.total;
-          console.log(this.collectionSize);
+          
           resolve(true);
         },
         err => {
@@ -184,7 +177,7 @@ export class ContactoListComponent implements OnInit {
     this.permisoService.getPermisoByFilter(qs).subscribe(
       (res:Permiso) => {
         this.permiso = res;
-        console.log("permiso",res);
+        
       }, 
       err => {
 
@@ -193,12 +186,8 @@ export class ContactoListComponent implements OnInit {
   }
 
   onChangePage(event){
-    // this.spinner.show(this.spinner1);
+    
     this.onSearch(event);
-    // this.getUsuarios(event).then(
-    //   res => this.spinner.hide(this.spinner1),
-    //   err => this.spinner.hide(this.spinner1),
-    // )
   }
 
   onDelete(contacto: Contacto) {
@@ -240,9 +229,6 @@ export class ContactoListComponent implements OnInit {
     modalRef.result.then(
       res => this.onSearch(),
     );
-    // modalRef.dismiss.then(
-    //   res => this.onSearch(),
-    // );
   }
 
   onEdit(contacto: Contacto){
@@ -251,14 +237,5 @@ export class ContactoListComponent implements OnInit {
     modalRef.result.then(
       res => this.onSearch(),
     );
-
-    // modalRef.componentInstance.sendRespuesta.subscribe(result => {
-    //   console.log(result);
-    //   if(result) {
-
-    //   }
-    // });
-    
-
   }
 }

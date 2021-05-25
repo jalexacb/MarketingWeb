@@ -33,7 +33,7 @@ export class ObjetivoEditModalComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.objetivo);
+    
     this.spinner.show(this.spinner1);
     this.objetivoService.update(this.objetivo).subscribe(
       res => {

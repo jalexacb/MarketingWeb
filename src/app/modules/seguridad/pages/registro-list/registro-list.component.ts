@@ -30,7 +30,7 @@ export class RegistroListComponent implements OnInit {
   ) { 
     this.permiso = new Permiso();
     this.busqueda = "";
-    // this.paginatorp.itemsPerPageLabel = ""
+    
     this.advancePage = 1;
     this.per_page = 5;
   }
@@ -59,10 +59,7 @@ export class RegistroListComponent implements OnInit {
     let qs = "";
     this.spinner.show(this.spinner1);
     if(this.busqueda != ''){
-      console.log("bus",this.busqueda);
-      
       qs += `&busqueda=${this.busqueda}`;
-      
     }
     if (event != null) {
       qs += `&page=${event}`;
@@ -81,7 +78,7 @@ export class RegistroListComponent implements OnInit {
     this.permisoService.getPermisoByFilter(qs).subscribe(
       (res:Permiso) => {
         this.permiso = res;
-        console.log("permiso",res);
+        
       }, 
       err => {
 
@@ -91,14 +88,10 @@ export class RegistroListComponent implements OnInit {
 
   getRegistros(qs: String = ""){
     return new Promise((resolve, reject) => {
-      // this.spinner.show(this.spinner1);
       this.registroService.getAll(`?per_page=${this.per_page}${qs}`).subscribe(
         (res:any) => {
-          console.log(res);
           this.registros = res.data;
           this.collectionSize = res.total;
-          console.log(this.collectionSize);
-          // this.spinner.show(this.spinner1);
           resolve(true);
         },
         err => {
@@ -126,7 +119,7 @@ export class RegistroListComponent implements OnInit {
   }
 
   onChangePage(event){
-    // this.spinner.show();
+    
     this.onSearch(event);
   }
 

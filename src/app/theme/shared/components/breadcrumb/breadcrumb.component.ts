@@ -24,8 +24,6 @@ export class BreadcrumbComponent implements OnInit {
     public loginService: LoginService,
     private titleService: Title
     ) {
-
-      
       this.getMenus().then(
         res => {
           this.type = 'theme2';
@@ -37,22 +35,11 @@ export class BreadcrumbComponent implements OnInit {
           }
         }
       )
-      // this.navigation = this.nav.get();
-      
   }
 
   ngOnInit() {
-    
-    
   }
   getMenus(){
-    // return new Promise((resolve, reject) => {
-    //   this.menuService.getAll().subscribe( res => {
-    //     this.navigation = res;
-    //     console.log(res);
-    //   });
-    // });
-    // this.spinner.show();
     return new Promise((resolve, reject) => {
       let qs = "?usuario_id="+localStorage.getItem('usuario_id');
       
@@ -72,8 +59,6 @@ export class BreadcrumbComponent implements OnInit {
           });
           
         }
-        // console.log(res);
-        // this.spinner.hide();
       });
     });
   }
@@ -190,9 +175,9 @@ export class BreadcrumbComponent implements OnInit {
       }
     });
     this.navigationList = result;
-    // console.log(this.navigationList);
+    
     this.titleService.setTitle(title + ' | NextCampañas');
-    // console.log("menu_idbread",this.navigationList[this.navigationList.length-1].menu_id);
+    
     if(this.navigationList[this.navigationList.length-1]){
       localStorage.setItem('menu_id',this.navigationList[this.navigationList.length-1].menu_id);
     }

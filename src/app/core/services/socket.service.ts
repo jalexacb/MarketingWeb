@@ -17,13 +17,7 @@ export class SocketService {
   this.echo = new Echo({
     broadcaster: 'socket.io',
     host: window.location.hostname + ':6001',
-    // auth: {
-    //   headers: {
-    //     Authorization: `Bearer ${token}`
-    //   }
-    // }
   })
-  // window.Echo.channel('example-channel')
 
     this.echo.connector.socket.on('connect', function () {
       console.log('CONNECTED');
@@ -66,31 +60,8 @@ export class SocketService {
     });
     
     return this.echo.channel('test-channel');
-
-    // .listen('.test', (data) => {
-    //   console.log(data);
-    //   status = data;
-    // });
     console.log("statusprimerp",status);
     return status;
-//     Echo.channel(`my-channel`)
-// .listen('.my-event', (e) => {
-//     consolec.log(e);
-// });
-    // this.echo = new Echo({
-    //   broadcaster: 'socket.io',
-    //   host: 'http://localhost:6001',
-
-    // });
-
-    // window['echo'] = this.echo;
-    // this.listen();
-
-    // this.echo.channel('test-channel')
-    //   .listen('.CampaniaCreadaEvent', (e)=>{
-    //     console.log(e);
-    //     alert("Evento escuchado");
-    //   });
   }
 
 }

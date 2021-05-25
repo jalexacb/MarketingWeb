@@ -29,7 +29,7 @@ export class ObjetivoListComponent implements OnInit {
   constructor(
     private spinner: NgxSpinnerService,
     private objetivoService: ObjetivoService,
-    // private modalService: NgbModal,
+    
     private loginService: LoginService,
     private permisoService: PermisoService,
     private modalService: BsModalService,
@@ -67,8 +67,8 @@ export class ObjetivoListComponent implements OnInit {
     let qs = "";
     this.spinner.show(this.spinner1);
     if(this.busqueda != ''){
-      console.log("bus",this.busqueda);
-      // this.spinner.show(this.spinner1);
+      
+      
       qs += `&busqueda=${this.busqueda}`;
       
     }
@@ -86,10 +86,10 @@ export class ObjetivoListComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.objetivoService.getAll(`?per_page=${this.per_page}${qs}`).subscribe(
         (res:any) => {
-          console.log(res);
+          
           this.objetivos = res.data;
           this.collectionSize = res.total;
-          console.log(this.collectionSize);
+          
           resolve(true);
         },
         err => {
@@ -138,7 +138,7 @@ export class ObjetivoListComponent implements OnInit {
     this.permisoService.getPermisoByFilter(qs).subscribe(
       (res:Permiso) => {
         this.permiso = res;
-        console.log("permiso",res);
+        
       }, 
       err => {
 
@@ -148,11 +148,6 @@ export class ObjetivoListComponent implements OnInit {
 
   onChangePage(event){
     this.onSearch(event);
-    // this.spinner.show(this.spinner1);
-    // this.getObjetivos(event).then(
-    //   res => this.spinner.hide(this.spinner1),
-    //   err => this.spinner.hide(this.spinner1),
-    // )
   }
 
   onDelete(objetivo: Objetivo) {
@@ -188,48 +183,17 @@ export class ObjetivoListComponent implements OnInit {
    
   }
 
-  // onCreate(){
-  //   const modalRef = this.modalService.open(ObjetivoAddModalComponent, { size: 'sm' });
-  //   modalRef.componentInstance.name = 'World';
-  //   modalRef.result.then(
-  //     res => this.onSearch(),
-  //   );
-  // }
-
-  // onEdit(objetivo: Objetivo){
-  //   const modalRef = this.modalService.open(ObjetivoEditModalComponent, { size: 'sm' });
-  //   modalRef.componentInstance.objetivo = objetivo;
-  //   modalRef.result.then(
-  //     res => this.onSearch(),
-  //   );
-  // }
-
   onCreate(){
-    // const modalRef = this.modalService.open(UsuarioAddModalComponent, { size: 'lg' });
-    // modalRef.componentInstance.name = 'World';
-
     const initialState = {
     };
     this.bsModalRef = this.modalService.show(ObjetivoAddModalComponent, {initialState, class: 'modal-sm', backdrop: 'static'});
     this.bsModalRef.content.sendRespuesta.subscribe(res =>{
       this.getObjetivos();
       this.advancePage = 1;
-      console.log("res",res);
-
     });
   }
 
-
-
   onEdit(objetivo: Objetivo){
-    // const modalRef = this.modalService.open(objetivoEditModalComponent, { size: 'lg' });
-    // modalRef.componentInstance.objetivo = objetivo;
-    // modalRef.componentInstance.sendRespuesta.subscribe(result => {
-    //   console.log(result);
-    //   if(result) {
-
-    //   }
-    // });
     const initialState = { 
       objetivo: objetivo
     };
@@ -237,14 +201,10 @@ export class ObjetivoListComponent implements OnInit {
     this.bsModalRef.content.sendRespuesta.subscribe(res =>{
       this.getObjetivos();
       this.advancePage = 1;
-        console.log("res",res);
+        
     }
     
     );
-    
-
   }
-
-
 }
 

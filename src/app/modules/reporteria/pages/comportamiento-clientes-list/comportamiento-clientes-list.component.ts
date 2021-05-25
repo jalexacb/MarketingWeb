@@ -40,7 +40,7 @@ export class ComportamientoClientesListComponent implements OnInit {
   ) { 
     this.permiso = new Permiso();
     this.busqueda = "";
-    // this.paginatorp.itemsPerPageLabel = ""
+    
     this.advancePage = 1;
     this.per_page = 5;
     this.settingsSelect = {
@@ -66,7 +66,7 @@ export class ComportamientoClientesListComponent implements OnInit {
     this.canal_id = "";
     this.canalesSeleccionados = [];
     this.interesesSeleccionados = []; 
-    // this.fecha_actual = 
+    
     this.fecha_inicio_seguimiento = moment(moment().startOf('year'), moment.ISO_8601).format();
     this.fecha_fin_seguimiento = moment(now.format(), moment.ISO_8601).format();
   }
@@ -107,13 +107,11 @@ export class ComportamientoClientesListComponent implements OnInit {
         }
       });
     }
-    
-
     return canales.join(", ");
   }
 
   data() {
-    // First find distinct teams and then filter information about him
+    
     return this.finalL.map(x => x[0])
       .filter((v, i, a) => a.indexOf(v) === i)
       .map(x => ({ 
@@ -136,17 +134,6 @@ export class ComportamientoClientesListComponent implements OnInit {
     if(this.fecha_fin_seguimiento){
       qs += "&fecha_fin="+moment(this.fecha_fin_seguimiento).format('YYYY-MM-DD');
     }
-    // if(this.canalesSeleccionados){
-    //   let canalesId = [];
-    //   this.canalesSeleccionados.forEach(canal=>{
-    //     canalesId.push(canal.id);
-    //   });
-    //   qs += "&canal_id="+canalesId.join(',');
-    // }
-
-    // if(this.canal_id){
-    //   qs += "&canal_id="+this.canal_id;
-    // }
     if(this.canalesSeleccionados.length > 0){
       let canalesId = [];
       this.canalesSeleccionados.forEach(canal=>{
@@ -173,10 +160,10 @@ export class ComportamientoClientesListComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.canalService.getAll('?status=A').subscribe(
         (res:any) => {
-          console.log(res);
+          
           this.canales = res;
           this.canalesSeleccionados = this.canales;
-          // this.canal_id = this.canales[0].id;
+          
           resolve(true);
         },
         err => {
@@ -187,8 +174,6 @@ export class ComportamientoClientesListComponent implements OnInit {
   }
 
   onChangeCanal(event){
-    console.log(event);
-    // this.canalesNombres.push()
     this.onSearch();
   }
 
@@ -196,8 +181,6 @@ export class ComportamientoClientesListComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.interesService.getAll('?status=A').subscribe(
         (res:any) => {
-          console.log(res);
-         
           this.intereses = res;
           
           resolve(true);
@@ -211,13 +194,13 @@ export class ComportamientoClientesListComponent implements OnInit {
 
   getContactos(qs: String = ""){
     return new Promise((resolve, reject) => {
-      console.log(qs);
+      
       this.contactoService.getReporteComportamiento(`?per_page=${this.per_page}${qs}`).subscribe(
         (res:any) => {
-          console.log(res);
+          
           this.contactos = res.data;
           this.collectionSize = res.total;
-          console.log(this.collectionSize);
+          
           resolve(true);
         },
         err => {
@@ -229,51 +212,23 @@ export class ComportamientoClientesListComponent implements OnInit {
 
   onCanalSelect(item: any) {
     this.onSearch();
-    console.log(item);
-  //  et intereses = [];
-  //   this.campania.intereses.forEach(interes => {
-  //     intereses.push(interes.nombre);
-  //   });
-
-  //   this.getRecomendacion(int lereses);
   }
 
   onSelectAllCanales(items: any) {
     this.canalesSeleccionados = items;
     this.onSearch();
-    console.log(items);
   }
 
   onInteresSelect(item: any) {
     this.onSearch();
-    console.log(item);
-  //  et intereses = [];
-  //   this.campania.intereses.forEach(interes => {
-  //     intereses.push(interes.nombre);
-  //   });
-
-  //   this.getRecomendacion(int lereses);
   }
+
   onCanalDeSelect(item: any) {
     this.onSearch();
-    console.log(item);
-  //  et intereses = [];
-  //   this.campania.intereses.forEach(interes => {
-  //     intereses.push(interes.nombre);
-  //   });
-
-  //   this.getRecomendacion(int lereses);
   }
 
   onInteresDeSelect(item: any) {
     this.onSearch();
-    console.log(item);
-  //  et intereses = [];
-  //   this.campania.intereses.forEach(interes => {
-  //     intereses.push(interes.nombre);
-  //   });
-
-  //   this.getRecomendacion(int lereses);
   }
 
   onDeSelectAllCanales(){
@@ -288,7 +243,6 @@ export class ComportamientoClientesListComponent implements OnInit {
   onSelectAllInteres(items: any) {
     this.interesesSeleccionados = [];
     this.onSearch();
-    console.log(items);
   }
 
   onKeyBackSpace(){
@@ -298,10 +252,6 @@ export class ComportamientoClientesListComponent implements OnInit {
   }
 
   onChangePage(event){
-    // this.spinner.show();
     this.onSearch(event);
   }
-
-
-
 }

@@ -19,36 +19,26 @@ export class ParametroService {
   }
 
   getAll(qs: string = "") {
-    // let params = null;
     const headers = new HttpHeaders().set('Content-Type','aplication/json').set('Authorization', `${this.token}`);
-    // headers.append('Authorization', `${this.token}`)
-    // let options = new HttpO
     return this._http.get(`${this.url}/parametro${qs}`,{headers:headers});
   }
 
   getParametrosSeguridad(qs:string = ""){
-    console.log("hola");
     const headers = new HttpHeaders().set('Content-Type','aplication/json').set('Authorization', `${this.token}`);
     return this._http.get(`${this.url}/parametro/seguridad${qs}`,{headers:headers});
   }
 
   delete(id:string, qs: string = ""){
-   
-    
     let params = null;
     const headers = new HttpHeaders().set('Content-Type','aplication/json')
                                      .set('Authorization', `${this.token}`);
-    // let options = new HttpO
     return this._http.post(`${this.url}/parametro/delete/${id}${qs}`,params,{headers:headers});
-  
-
   }
 
   save(parametro: Parametro){
     let params = parametro;
     const headers = new HttpHeaders().set('Content-Type','aplication/json')
                                      .set('Authorization', `${this.token}`);
-    // let options = new HttpO
     return this._http.post(`${this.url}/parametro/store`,params,{headers:headers});
   }
 
@@ -56,7 +46,6 @@ export class ParametroService {
     let params = parametros;
     const headers = new HttpHeaders().set('Content-Type','aplication/json')
                                      .set('Authorization', `${this.token}`);
-    // let options = new HttpO
     return this._http.post(`${this.url}/parametro/seguridad`,params,{headers:headers});
   }
 
@@ -64,7 +53,6 @@ export class ParametroService {
     let params = parametros;
     const headers = new HttpHeaders().set('Content-Type','aplication/json')
                                      .set('Authorization', `${this.token}`);
-    // let options = new HttpO
     return this._http.post(`${this.url}/parametro/`,params,{headers:headers});
   }
 }

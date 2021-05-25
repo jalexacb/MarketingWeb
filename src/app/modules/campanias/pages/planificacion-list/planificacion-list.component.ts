@@ -1,5 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-
 import {
   Component,
   OnInit,
@@ -18,7 +16,7 @@ import {
   addHours,
 } from 'date-fns';
 import { Subject } from 'rxjs';
-// import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import {
   CalendarEvent,
   CalendarEventAction,
@@ -99,51 +97,7 @@ export class PlanificacionListComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
   events: CalendarEvent[] = [];
-  // events: CalendarEvent[] = [
-  //   {
-  //     start: subDays(startOfDay(new Date()), 1),
-  //     end: addDays(new Date(), 1),
-  //     title: 'Campaña 1',
-  //     color: colors.red,
-  //     actions: this.actions,
-  //     allDay: true,
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true,
-  //     },
-  //     draggable: true,
-  //   },
-  //   {
-  //     start: startOfDay(new Date()),
-  //     title: 'Campaña 2',
-  //     color: colors.yellow,
-  //     actions: this.actions,
-  //   },
-  //   {
-  //     start: subDays(endOfMonth(new Date()), 3),
-  //     end: addDays(endOfMonth(new Date()), 3),
-  //     title: 'Campaña 3',
-  //     color: colors.blue,
-  //     allDay: true,
-  //   },
-  //   {
-  //     start: addHours(startOfDay(new Date()), 2),
-  //     end: addHours(new Date(), 2),
-  //     title: 'Campaña 4',
-  //     color: colors.yellow,
-  //     actions: this.actions,
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true,
-  //     },
-  //     draggable: true,
-  //   },
-  // ];
-
   activeDayIsOpen: boolean = false;
-
-
-
   constructor(
     private eventoCampaniaService:EventoCampaniaService,
     private spinner: NgxSpinnerService,
@@ -155,7 +109,7 @@ export class PlanificacionListComponent implements OnInit {
     this.permiso = new Permiso();
     this.locale = 'es';
     this.busqueda = "";
-    // this.paginatorp.itemsPerPageLabel = ""
+    
     this.advancePage = 1;
     this.per_page = 5;
     this.eventosCampanias = [];
@@ -250,7 +204,7 @@ export class PlanificacionListComponent implements OnInit {
   onSearch(event:any = null){
     let qs = "";
     if(this.busqueda != ''){
-      console.log("bus",this.busqueda);
+      
       this.spinner.show();
       qs += `&busqueda=${this.busqueda}`;
       
@@ -269,25 +223,10 @@ export class PlanificacionListComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.eventoCampaniaService.getAll(`?per_page=${this.per_page}${qs}`).subscribe(
         (res:any) => {
-          console.log(res);
+          
           this.eventosCampanias = res.data;
           this.events = [];
           this.eventosCampanias.forEach(eventoCampania => {
-            // let event = 
-            //   {
-            //     title: eventoCampania.campania.nombre,
-            //     start: startOfDay(eventoCampania.fecha_inicio),
-            //     end: endOfDay(eventoCampania.fecha_fin),
-            //     color: colors.red,
-            //     draggable: false,
-            //     resizable: {
-            //       beforeStart: false,
-            //       afterEnd: false,
-            //     },
-            //   }
-            
-            // this.events.push(event);
-
             this.events = [
               ...this.events,
               {
@@ -304,8 +243,8 @@ export class PlanificacionListComponent implements OnInit {
             ];
           });
           this.collectionSize = res.total;
-          console.log(this.eventosCampanias);
-          console.log(this.events);
+          
+          
           resolve(true);
         },
         err => {
@@ -322,7 +261,7 @@ export class PlanificacionListComponent implements OnInit {
     this.permisoService.getPermisoByFilter(qs).subscribe(
       (res:Permiso) => {
         this.permiso = res;
-        console.log("permiso",res);
+        
       }, 
       err => {
 
@@ -351,9 +290,9 @@ export class PlanificacionListComponent implements OnInit {
         this.advancePage = 1;
       }
     );
-    // modalRef.dismiss.then(
-    //   res => this.onSearch(),
-    // );
+    
+    
+    
   }
 
 }

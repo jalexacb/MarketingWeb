@@ -14,7 +14,7 @@ export class ContactoFrmComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.contacto);
+    
   }
 
   getNumber(event){

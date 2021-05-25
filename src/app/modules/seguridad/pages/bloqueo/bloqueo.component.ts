@@ -23,7 +23,7 @@ export class BloqueoComponent implements OnInit {
   }
 
   ngOnInit() {
-    // let parametro = null;
+    
     this.getParametrosSeguridad();
 
   }
@@ -31,7 +31,7 @@ export class BloqueoComponent implements OnInit {
   getParametrosSeguridad(){
     this.parametroService.getParametrosSeguridad().subscribe(
       (res:any) => {
-        console.log(res);
+        
         if(res[0].id == "1" ){
           this.max_intentos = res[0].valor;
         }
@@ -40,7 +40,7 @@ export class BloqueoComponent implements OnInit {
         }
         
         
-        console.log("Paráemtrps");
+        
       },
       err => {
 
@@ -71,7 +71,7 @@ export class BloqueoComponent implements OnInit {
           'success'
         );
         this.spinner.hide(this.spinner1);
-        console.log("Se ha guardado");
+        
       },
       err => {
 
@@ -84,7 +84,7 @@ export class BloqueoComponent implements OnInit {
       if(this.max_tiempo.length <=3 || this.max_intentos.length <=3 ){
         return true;
        }
-      // return true;
+      
      }
      
      return false;        

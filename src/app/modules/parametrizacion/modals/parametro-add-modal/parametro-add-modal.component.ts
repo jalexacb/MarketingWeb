@@ -36,7 +36,7 @@ export class ParametroAddModalComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.parametro);
+    
     this.spinner.show(this.spinner1);
     this.parametroService.save(this.parametro).subscribe(
       res => {

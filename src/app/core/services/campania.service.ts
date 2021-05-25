@@ -27,31 +27,20 @@ export class CampaniaService {
   }
 
   getAllSeguimiento(qs: string = "") {
-    // let params = null;
     const headers = new HttpHeaders().set('Content-Type','aplication/json').set('Authorization', `${this.token}`);
-    // headers.append('Authorization', `${this.token}`)
-    // let options = new HttpO
     return this._http.get(`${this.url}/campania/seguimientos${qs}`,{headers:headers});
   }
   getUltimaCampania(qs: string = "") {
-    // let params = null;
     const headers = new HttpHeaders().set('Content-Type','aplication/json').set('Authorization', `${this.token}`);
-    // headers.append('Authorization', `${this.token}`)
-    // let options = new HttpO
     return this._http.get(`${this.url}/campania/ultimacampania${qs}`,{headers:headers});
   }
 
   getReporteSeguimiento(qs: string = "") {
-    // let params = null;
     const headers = new HttpHeaders().set('Content-Type','aplication/json').set('Authorization', `${this.token}`);
-    // headers.append('Authorization', `${this.token}`)
-    // let options = new HttpO
     return this._http.get(`${this.url}/campania/reporteseguimiento${qs}`,{headers:headers});
   }
   getTotales(qs: string = ""){
     const headers = new HttpHeaders().set('Content-Type','aplication/json').set('Authorization', `${this.token}`);
-    // headers.append('Authorization', `${this.token}`)
-    // let options = new HttpO
     return this._http.get(`${this.url}/campania/totales${qs}`,{headers:headers});
   }
 
@@ -59,23 +48,14 @@ export class CampaniaService {
     let params = campania;
     const headers = new HttpHeaders().set('Content-Type','aplication/json')
                                      .set('Authorization', `${this.token}`);
-    // let options = new HttpO
+    
     return this._http.post(`${this.url}/campania/store`,params,{headers:headers});
   }
-
-  // ejecutar(id){
-  //   let params = campania;
-  //   const headers = new HttpHeaders().set('Content-Type','aplication/json')
-  //                                    .set('Authorization', `${this.token}`);
-  //   // let options = new HttpO
-  //   return this._http.post(`${this.url}/campania/ejecutar/${id}`,params,{headers:headers});
-  // }
 
   ejecutar(id){
     let params = null;
     const headers = new HttpHeaders().set('Content-Type','aplication/json')
                                      .set('Authorization', `${this.token}`);
-    // let options = new HttpO
     return this._http.post(`${this.url}/campania/ejecutar/${id}`,params,{headers:headers});
   }
 
@@ -87,28 +67,12 @@ export class CampaniaService {
   }
 
   getImage(qs: string = "") {
-    // let params = null;
     const headers = new HttpHeaders().set('Content-Type','aplication/json').set('Authorization', `${this.token}`);
-    // headers.append('Authorization', `${this.token}`)
-    // let options = new HttpO
     return this._http.get(`${this.url}/campania/get-image${qs}`,{headers:headers});
   }
 
-  
-
-  // onUpload(file):Observable<any>{
-  //   console.log("ser",file);
-  //   const fd= new FormData;
-  //   fd.append('image',file);
-  //   const headers = new HttpHeaders().set('Authorization', `${this.token}`)
-  //                                    .set('Content-Type','application/multipart/form-data').set('Accept','*/*');
-  //   return   this._http.post(`${this.url}/campania/add-image`,fd,{headers:headers}); 
-  // }
-
   getRecomendacion(qs: string = "") {
     const headers = new HttpHeaders().set('Content-Type','aplication/json').set('Authorization', `${this.token}`);
-    // headers.append('Authorization', `${this.token}`)
-    // let options = new HttpO
     return this._http.get(`${this.url}/campania/recomendados/${qs}`,{headers:headers});
   }
 
@@ -116,7 +80,7 @@ export class CampaniaService {
     let params = null;
     const headers = new HttpHeaders().set('Content-Type','aplication/json')
                                      .set('Authorization', `${this.token}`);
-    // let options = new HttpO
+    
     return this._http.post(`${this.url}/campania/archivar/${id}`,params,{headers:headers});
   }
 
@@ -124,7 +88,7 @@ export class CampaniaService {
     let params = null;
     const headers = new HttpHeaders().set('Content-Type','aplication/json')
                                      .set('Authorization', `${this.token}`);
-    // let options = new HttpO
+    
     return this._http.post(`${this.url}/campania/activar/${id}`,params,{headers:headers});
   }
 
@@ -132,7 +96,7 @@ export class CampaniaService {
     let params = campania;
     const headers = new HttpHeaders().set('Content-Type','aplication/json')
                                      .set('Authorization', `${this.token}`);
-    // let options = new HttpO
+    
     return this._http.post(`${this.url}/campania/sms`,params,{headers:headers});
   }
 
@@ -140,7 +104,7 @@ export class CampaniaService {
     let params = campania;
     const headers = new HttpHeaders().set('Content-Type','aplication/json')
                                      .set('Authorization', `${this.token}`);
-    // let options = new HttpO
+    
     return this._http.post(`${this.url}/campania/${campania.id}`,params,{headers:headers});
   }
 

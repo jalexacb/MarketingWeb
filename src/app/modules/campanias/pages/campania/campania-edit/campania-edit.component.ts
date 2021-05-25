@@ -48,13 +48,13 @@ export class CampaniaEditComponent implements OnInit {
     this.objetivos = [];
     this.campania = new Campania();
    
-    // this.campania = new Campania();
+    
     this.id = this.route.snapshot.paramMap.get("id");
     this.step = 1;
   }
 
   ngOnInit() {
-    console.log("camp",this.campania);
+    
     this.spinner.show(this.spinner1);
     let p1 = this.getCampaniaById();
     let p2 = this.getCanales();
@@ -67,7 +67,7 @@ export class CampaniaEditComponent implements OnInit {
       .then(result => {
         this.spinner.hide(this.spinner1);
         this.campania.objetivos.forEach(objetivo => {
-          console.log("objs", this.objetivos);
+          
           let objetivoSeleccionado = this.objetivos.filter(o=> o.id === objetivo.id)[0];
           if(objetivoSeleccionado){
             objetivoSeleccionado.seleccionado = true;
@@ -77,23 +77,12 @@ export class CampaniaEditComponent implements OnInit {
             intereses.push(interes.nombre);
           });
           this.campaniaFrm.getRecomendacion(intereses);
-          // else {
-          //   this.isSelectedAll = false;
-          // }
 
         });
-        // if(this.campania.mensaje != ''){
-        //   this.step = 3;
-        // }else if(this.canales.length == 0 || this.intereses.length == 0 || this.contactos.length == 0){
-        //   this.step = 1;
-        // }else {
-        //   this.step = 2;
-        // }
       }).catch(error => {
-        // this.step = 1;
+        
         this.spinner.hide(this.spinner1);
       });
-    
     
   }
 
@@ -106,37 +95,31 @@ export class CampaniaEditComponent implements OnInit {
 
   getImage(event){
     this.selectedFile = event;
-    console.log("padre",this.selectedFile);
   }
 
   getCampaniaById(){
     return new Promise((resolve, reject) => {
       this.campaniaService.getById(this.id).subscribe(
         (res:Campania) => {
-         this.campania = res;
-         this.campania.contactos = [];
-         this.campania.intereses = [];
-         this.campania.canales = [];
-         this.campania.objetivos = [];
-         this.campania.campania_contactos.forEach(campania_contacto => {
-          this.campania.contactos.push(campania_contacto.contacto);
-        });
-        this.campania.campania_canales.forEach(campania_canal => {
-          this.campania.canales.push(campania_canal.canal);
-        });
-        this.campania.campania_intereses.forEach(campania_interes => {
-          this.campania.intereses.push(campania_interes.interes);
-        });
-        this.campania.campania_objetivos.forEach(campania_objetivo => {
-          this.campania.objetivos.push(campania_objetivo.objetivo);
-        });
-        
-    
-        console.log("c",this.campania.contactos);
-        console.log("c",this.campania.objetivos);
-         console.log(res);
-         resolve(true);
-          // this.activeModal.close();
+          this.campania = res;
+          this.campania.contactos = [];
+          this.campania.intereses = [];
+          this.campania.canales = [];
+          this.campania.objetivos = [];
+          this.campania.campania_contactos.forEach(campania_contacto => {
+            this.campania.contactos.push(campania_contacto.contacto);
+          });
+          this.campania.campania_canales.forEach(campania_canal => {
+            this.campania.canales.push(campania_canal.canal);
+          });
+          this.campania.campania_intereses.forEach(campania_interes => {
+            this.campania.intereses.push(campania_interes.interes);
+          });
+          this.campania.campania_objetivos.forEach(campania_objetivo => {
+            this.campania.objetivos.push(campania_objetivo.objetivo);
+          });
+          resolve(true);
+          
         },
         err => {
           reject();
@@ -149,7 +132,7 @@ export class CampaniaEditComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.canalService.getAll('?status=A').subscribe(
         (res:any) => {
-          console.log(res);
+          
           this.canales = res;
           resolve(true);
         },
@@ -164,7 +147,7 @@ export class CampaniaEditComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.objetivoService.getAll('?status=A').subscribe(
         (res:any) => {
-          console.log(res);
+          
           this.objetivos = res;
           resolve(true);
         },
@@ -179,7 +162,7 @@ export class CampaniaEditComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.contactoService.getAll('?status=A').subscribe(
         (res:any) => {
-          console.log(res);
+          
           this.contactos = res;
           resolve(true);
         },
@@ -194,8 +177,6 @@ export class CampaniaEditComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.interesService.getAll('?status=A').subscribe(
         (res:any) => {
-          console.log(res);
-         
           this.intereses = res;
           
           resolve(true);
@@ -269,7 +250,7 @@ export class CampaniaEditComponent implements OnInit {
       let tagInicial = `<${tag}>`;
       let tagFinal = `</${tag}>`;
 
-      // var cadena = "Test abc test test abc test test test abc test test abc";
+      
       let regInicio = new RegExp(tagInicial,'g');
       let regFin = new RegExp(tagFinal,'g');
       const matchInicio = this.campania.mensaje.match(regInicio);
@@ -277,16 +258,14 @@ export class CampaniaEditComponent implements OnInit {
       if(!matchInicio && !matchFinal) return;
       this.campania.mensaje = this.campania.mensaje.replace(regInicio, symbol);
       this.campania.mensaje = this.campania.mensaje.replace(regFin, symbol);
-
-    // console.log(this.campania.mensaje);
     });
-// console.log(this.campania.mensaje);
+
    
   }
 
   onSubmitGuardar(){
     this.convertirAWhatsAppText();
-    // this.setValues();
+    
     Swal.fire({
       title: '¿Está seguro de guardar esta campaña?',
       icon: 'success',
@@ -313,42 +292,26 @@ export class CampaniaEditComponent implements OnInit {
        
       }
     });
-    console.log(this.campania);
-    
     
   }
 
   updateCampania(){
     return new Promise((resolve, reject)=>{
       this.convertirAWhatsAppText();
-      // this.setValues();
-      console.log(this.campania);
-
       this.campaniaService.update(this.campania).subscribe(
         res => {
           if(this.selectedFile){
 
             this.campaniaService.onUpload(this.selectedFile).subscribe(
               response=>{
-                //  if(response.status=='success'){
-                  resolve(true);
-                    console.log(response);
-                  },
-                  error=>{
-                    // this.spinner.hide();
-                    reject();
-                    console.log(<any>error);
-                  }
-                );
-                
+                resolve(true);
+              },
+              error=>{
+                reject();
+              }
+            );
           }
           resolve(true);
-          // Swal.fire(
-          //   'Modificado',
-          //   'Se ha modificado con éxito',
-          //   'success'
-          // )
-          // this.activeModal.close();
         },
         err => {
           reject();
@@ -362,26 +325,21 @@ export class CampaniaEditComponent implements OnInit {
       resolve(true);
       this.campaniaService.ejecutar(this.campania.id).subscribe(
         res => { 
-          console.log(res);
           resolve(true);
-          
         }, 
         err => {
           reject();
         }
       )
-  
     });
   }
 
   onSubmitEjecutar(){
     this.convertirAWhatsAppText();
-    // this.setValues();
-    console.log(this.campania);
     this.spinner.show(this.spinner1);
     this.updateCampania().then(
       res => {
-        console.log(this.campania.id);
+        
         this.ejecutarCampania().then(
           res => {
             

@@ -18,11 +18,8 @@ export class LoginService {
   }
 
   register(usuario: Usuario): Observable<any>{
-    
     let params = usuario;
     const headers = new HttpHeaders().set('Content-Type','aplication/json');
-    // headers.append('Authorization', `Bearer ${this.token}`)
-    // let options = new HttpO
     return this._http.post(`${this.url}/register`,params,{headers:headers});
   }
 
@@ -30,7 +27,6 @@ export class LoginService {
     if( getToken !=null ){
       usuario.getToken = true;
     }
-    console.log(getToken);
     let params = usuario;
     const headers = new HttpHeaders().set('Content-Type','aplication/json');
     return this._http.post(`${this.url}/login`, params, {headers});
@@ -41,8 +37,6 @@ export class LoginService {
   desbloqueoUsuario(id){
     let params = null;
     const headers = new HttpHeaders().set('Content-Type','aplication/json')
-                                    //  .set('Authorization', `${this.token}`);
-    // let options = new HttpO
     return this._http.post(`${this.url}/usuario/desbloqueoUsuario/${id}`,params,{headers:headers});
   }
 
@@ -69,16 +63,4 @@ export class LoginService {
 
     return this.token;
   }
-
-  // isLogged(){
-  //   let token = localStorage.getItem('token');
-  //   let isLogged = false;
-  //   if( token != 'undefined' ) {
-  //     isLogged = true;
-  //   }else {
-  //     isLogged = false;
-  //   }
-
-  //   return isLogged;
-  // }
 }

@@ -9,8 +9,6 @@ import { Canal } from 'src/app/theme/shared/models/Canal';
 import { Contacto } from 'src/app/theme/shared/models/Contacto';
 import { Interes } from 'src/app/theme/shared/models/Interes';
 import { Objetivo } from 'src/app/theme/shared/models/Objetivo';
-// import 'froala-editor/js/languages/es';
-// import 'node_modules/froala-editor/js/languages/es.js';
 @Component({
   selector: 'app-campania-frm',
   templateUrl: './campania-frm.component.html',
@@ -25,8 +23,6 @@ export class CampaniaFrmComponent implements OnInit {
   @Input() intereses: Array<Interes>;
   @Output() sendImage: EventEmitter<File>= new EventEmitter<File>();
   public settingsSelect: {
-
-    // allowSearchFilter: true
   };
   public froala_options: Object = {
     language: 'es',
@@ -155,23 +151,10 @@ export class CampaniaFrmComponent implements OnInit {
     private interesService: InteresService,
     private campaniaService: CampaniaService,
   ) {
-
-    // this.canales = [];
-    // this.contactos = [];
-    // this.intereses = [];
     this.isSelectedAll = false;
-
   }
 
   ngOnInit() {
-    //  this.spinner.show(this.spinner1);
-    // let p1 = this.getCanales();
-    // let p2 = this.getContactos();
-    // let p3 = this.getIntereses();
-
-    // Promise.all([p1,p2,p3])
-    //   .then(result => this.spinner.hide(this.spinner1))
-    //   .catch(error => this.spinner.hide(this.spinner1));
 
       this.settingsSelect = {
         singleSelection: false,
@@ -181,16 +164,11 @@ export class CampaniaFrmComponent implements OnInit {
         unSelectAllText: 'Deseleccione todo',
         itemsShowLimit: 3,
       };
-
       let intereses = [];
       this.campania.intereses.forEach(interes => {
         intereses.push(interes.nombre);
       });
       this.getRecomendacion(intereses);
-
-       
-
-        console.log("obfrm",this.campania.objetivos);
   }
 
   getNombresDetalle(arreglo){
@@ -215,7 +193,6 @@ export class CampaniaFrmComponent implements OnInit {
 
 
   onItemSelect(item: any) {
-    console.log(item);
     let intereses = [];
     this.campania.intereses.forEach(interes => {
       intereses.push(interes.nombre);
@@ -225,69 +202,39 @@ export class CampaniaFrmComponent implements OnInit {
   }
 
   onInteresDeSelect(item: any) {
-    // this.onSearch();
     let intereses = [];
     this.campania.intereses.forEach(interes => {
       intereses.push(interes.nombre);
     });
 
     this.getRecomendacion(intereses);
-    console.log(item);
-  //  et intereses = [];
-  //   this.campania.intereses.forEach(interes => {
-  //     intereses.push(interes.nombre);
-  //   });
-
-  //   this.getRecomendacion(int lereses);
   }
 
   onDeSelectAllIntereses(){
     this.contactos.forEach(contacto => {
      contacto.recomendado = false;
-
-      // this.campania.contactos.push(contactoRecomendado);
     });
   }
 
   getRecomendacion(intereses){
-    console.log("int",intereses);
     this.spinner.show(this.spinner2);
     this.contactoService.getRecomendacion(intereses).subscribe(
       (res:any) =>{
-        console.log("recomendación1",res);
-        let contactosRecomendados:any = Object.values(res); // valores = ["Scott", "Negro", true, 5];
-        // console.log("recomendacion2",contactosRecomendados);
-        // for(let i=0; i< contactosRecomendados.length; i++){
-        //   console.log("recomendacion3",contactosRecomendados[i]);
-        // }
-        // this.campania.contactos = [];
+        let contactosRecomendados:any = Object.values(res);
         this.contactos.forEach(contacto => {
           let contactoRecomendado = contactosRecomendados.filter(contactoR=>contacto.nombres === contactoR.nombre)[0];
-          // contactoRecomendado.seleccionado = true;
           if(contactoRecomendado){
             contacto.recomendado = true;
           }else{
             contacto.recomendado = false;
           }
-
-          // this.campania.contactos.push(contactoRecomendado);
         });
-        // this.isSelectedAll = true;
         this.campania.contactos.forEach(contacto => {
-          console.log("co", this.contactos);
           let contactoSeleccionado = this.contactos.filter(c=> c.id === contacto.id)[0];
           if(contactoSeleccionado){
             contactoSeleccionado.seleccionado = true;
           } 
-          // else {
-          //   this.isSelectedAll = false;
-          // }
-
         });
-        console.log(this.campania.contactos);
-        // this.contactos.forEach(contacto => {
-        //   if(contacto.nombres === res.nombre)
-        // });
         this.spinner.hide(this.spinner2);
 
       }
@@ -295,7 +242,6 @@ export class CampaniaFrmComponent implements OnInit {
   }
 
   onSelectAll(items: any) {
-    console.log(items);
     let intereses = [];
     this.campania.intereses = items;
     this.campania.intereses.forEach(interes => {
@@ -307,31 +253,15 @@ export class CampaniaFrmComponent implements OnInit {
   }
 
   addObjetivo(objetivo:Objetivo, i:number=null){
-    // let contactoSeleccionado = this.contactos.filter((c)=> c.id === contacto.id)[0];
-    // if(contactoSeleccionado.seleccionado){
-    //   this.campania.contactos.push(contacto);
-    // }else{
-    //   this.campania.contactos.splice(i, 1);
-    // }
-    // this.isSelectedAllObjetivos = true;
     this.campania.objetivos = [];
     this.objetivos.forEach(o=>{
       if(o.seleccionado){
         this.campania.objetivos.push(o);
       }
     });
-
-
-
   }
 
   addContacto(contacto:Contacto, i:number=null){
-    // let contactoSeleccionado = this.contactos.filter((c)=> c.id === contacto.id)[0];
-    // if(contactoSeleccionado.seleccionado){
-    //   this.campania.contactos.push(contacto);
-    // }else{
-    //   this.campania.contactos.splice(i, 1);
-    // }
     this.isSelectedAll = true;
     this.campania.contactos = [];
     this.contactos.forEach(c=>{
@@ -342,9 +272,6 @@ export class CampaniaFrmComponent implements OnInit {
       }
 
     });
-
-
-
   }
 
   addAllContacto(){
@@ -352,7 +279,6 @@ export class CampaniaFrmComponent implements OnInit {
     this.contactos.forEach(contacto=>{
       contacto.seleccionado = this.isSelectedAll;
       if(this.isSelectedAll){
-
         this.campania.contactos.push(contacto);
       }
     });
@@ -368,33 +294,17 @@ export class CampaniaFrmComponent implements OnInit {
       }
       this.campania.url_media = event.target.files[0].name;
       this.sendImage.emit(event.target.files[0]);
-      // this.selectedFile=event.target.files[0];
-      // console.log(this.selectedFile);
       reader.readAsDataURL(event.target.files[0]);
     }
   }
 
   verificarURL(){
-
-    // let re = `(http|ftp|https)://[\w-]+(\.[\w-]+)*([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?`;
-    // let regex = new RegExp(re, 'mg');
-  //   let urlexp = new RegExp( '(http|ftp|https)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%&:/~+#-]*[\\w@?^=%&;/~+#-])?' );
-  // //  let urlexp = /([a-z]+\:\/+)([^\/\s]*)([a-z0-9\-@\^=%&;\/~\+]*)[\?]?([^ \#]*)#?([^ \#]*)/ig;
-  //   let urlexp1 = new RegExp(/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi);
     let expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
     let regex = new RegExp(expression);
     const match = this.campania.url.match(regex);
-    // const match1 = this.link.match(regex);
-    // console.log(match);
-      // const matchFinal = this.campania.body.match(regInicio);
-      if(!match ) return false;
-      if(match) return true;
-
+    if(!match ) return false;
+    if(match) return true;
     return;
-  }
-
-  getmessage(event){
-    console.log("con", event);
   }
 
 

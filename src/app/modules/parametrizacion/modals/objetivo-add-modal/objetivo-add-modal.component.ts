@@ -34,7 +34,7 @@ export class ObjetivoAddModalComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.objetivo);
+    
     this.spinner.show(this.spinner1);
     this.objetivoService.save(this.objetivo).subscribe(
       res => {

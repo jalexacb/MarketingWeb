@@ -134,110 +134,33 @@ export class CampaniaAddModalComponent implements OnInit {
       // };
   }
 
- //...
-  // addAllContacto(){
-  //   this.contactosSeleccionados = [];
-  //   this.contactos.forEach(contacto=>{
-  //     contacto.seleccionado = this.isSelectedAll;
-  //     if(this.isSelectedAll){
-        
-  //       this.contactosSeleccionados.push(contacto);
-  //     }
-  //   });
-  // }
-
-  // addContacto(contacto:Contacto, i:number=null){
-  //   let contactoSeleccionado = this.contactos.filter((c)=> c.id === contacto.id)[0];
-  //   if(contactoSeleccionado.seleccionado){
-  //     this.contactosSeleccionados.push(contacto);
-  //   }else{
-  //     this.contactosSeleccionados.splice(i, 1);
-  //   }
-    
-  // }
-  // onItemSelect(item: any) {
-  //   console.log(item);
-  //   let intereses = [];
-  //   this.interesesSeleccionados.forEach(interes => {
-  //     intereses.push(interes.nombre);
-  //   });
-    
-  //   this.contactoService.getRecomendacion(intereses).subscribe(
-  //     (res:any) =>{
-  //       console.log("recomendación",res);
-  //       let contactosRecomendados = res;
-  //       this.contactosSeleccionados = [];
-  //       contactosRecomendados.forEach(contactoR => {
-  //         let contactoRecomendado = this.contactos.filter(contacto=>contacto.nombres === contactoR.nombre)[0];
-  //         contactoRecomendado.seleccionado = true;
-  //         this.contactosSeleccionados.push(contactoRecomendado);
-  //       });
-  //       console.log(this.contactosSeleccionados);
-  //       // this.contactos.forEach(contacto => {
-  //       //   if(contacto.nombres === res.nombre)
-  //       // });
-        
-  //     }
-  //   )
-  // }
-  // onSelectAll(items: any) {
-  //   console.log(items);
-  // }
-    
-    //...
-    next(){
-      this.step += 1;
-    }
-    back(){
-        this.step -= 1;
-    }
+  
+  next(){
+    this.step += 1;
+  }
+  back(){
+      this.step -= 1;
+  }
 
     
   autoGrowTextZone(e, event) {
-    // e.target.style.height = "0px";
-    // e.target.style.height = (e.target.scrollHeight + 25)+"px";
-
-    // e.target.style.overflow = 'hidden';
-    // e.target.style.height = 0;
-    // e.target.style.height = e.target.scrollHeight + 'px';
-    // console.log(event);
     var el = this;
     let height = (event.style.height).substring(0, (event.style.height).length -2);
-    // console.log(height);
     setTimeout(function(){
       if(height < 580){
         e.target.style.cssText = 'height:auto;';
         event.style.cssText = 'height:auto;';
-        // for box-sizing other than "content-box" use:
-        // e.target.style.cssText = '-moz-box-sizing:content-box';
         e.target.style.cssText = 'height:' + e.target.scrollHeight + 'px';
         event.style.cssText = 'height:' + e.target.scrollHeight + 'px';
       }
       
     },0);
-
-    // if( !e.target.classList.contains('autoExpand') || e.target.nodeName != 'TEXTAREA' ) return
-  
-    // var minRows = e.target.getAttribute('data-min-rows')|0, rows;
-    // !e.target._baseScrollHeight && this.getScrollHeight(e.target)
-  
-    // e.target.rows = minRows
-    // rows = Math.ceil((e.target.scrollHeight - e.target._baseScrollHeight) / 16)
-    // e.target.rows = minRows + rows
   }
-
-  // getScrollHeight(elm){
-  //   let savedValue = elm.value
-  //   elm.value = ''
-  //   elm._baseScrollHeight = elm.scrollHeight
-  //   elm.value = savedValue
-  // }
 
   getCanales(){
     return new Promise((resolve, reject) => {
       this.canalService.getAll('?status=A').subscribe(
         (res:any) => {
-          console.log(res);
           this.canales = res;
           resolve(true);
         },
@@ -252,7 +175,6 @@ export class CampaniaAddModalComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.contactoService.getAll('?status=A').subscribe(
         (res:any) => {
-          console.log(res);
           this.contactos = res;
           resolve(true);
         },
@@ -265,15 +187,12 @@ export class CampaniaAddModalComponent implements OnInit {
 
   getImage(event){
     this.selectedFile = event;
-    console.log("padre",this.selectedFile);
   }
 
   getIntereses(qs: String = ""){
     return new Promise((resolve, reject) => {
       this.interesService.getAll('?status=A').subscribe(
         (res:any) => {
-          console.log(res);
-         
           this.intereses = res;
           
           resolve(true);
@@ -284,18 +203,6 @@ export class CampaniaAddModalComponent implements OnInit {
       );
     });
   }
-  // readUrl(event:any) { 
-  //   if (event.target.files && event.target.files[0]) { 
-  //     var reader = new FileReader(); 
-
-  //     reader.onload = (event:any) => { 
-  //       this.path_logo = event.target.result; 
-        
-  //     } 
-  //     this.campania.nombre_archivo = event.target.files[0].name;
-  //     reader.readAsDataURL(event.target.files[0]); 
-  //   } 
-  // } 
 
   convertirAWhatsAppText(){
     const whatsAppFormat = [
@@ -326,10 +233,7 @@ export class CampaniaAddModalComponent implements OnInit {
       if(!matchInicio && !matchFinal) return;
       this.campania.mensaje = this.campania.mensaje.replace(regInicio, symbol);
       this.campania.mensaje = this.campania.mensaje.replace(regFin, symbol);
-
-    // console.log(this.campania.mensaje);
     });
-// console.log(this.campania.mensaje);
    
   }
 
@@ -360,24 +264,6 @@ export class CampaniaAddModalComponent implements OnInit {
     return true;
   }
 
-  // verificarURL(){
-
-  //   // let re = `(http|ftp|https)://[\w-]+(\.[\w-]+)*([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?`;
-  //   // let regex = new RegExp(re, 'mg');
-  // //   let urlexp = new RegExp( '(http|ftp|https)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%&:/~+#-]*[\\w@?^=%&;/~+#-])?' );
-  // // //  let urlexp = /([a-z]+\:\/+)([^\/\s]*)([a-z0-9\-@\^=%&;\/~\+]*)[\?]?([^ \#]*)#?([^ \#]*)/ig; 
-  // //   let urlexp1 = new RegExp(/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi); 
-  //   let expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
-  //   let regex = new RegExp(expression);
-  //   const match = this.campania.url.match(regex);
-  //   // const match1 = this.link.match(regex);
-  //   // console.log(match);
-  //     // const matchFinal = this.campania.body.match(regInicio);
-  //     if(!match ) return false;
-  //     if(match) return true;
-
-  //   return;
-  // }
   setValues(){
     this.campania.contactos = this.contactosSeleccionados;
     this.campania.canales = this.canalesSeleccionados;
@@ -386,8 +272,6 @@ export class CampaniaAddModalComponent implements OnInit {
 
   onSubmitGuardar(){
     this.convertirAWhatsAppText();
-    // this.setValues();
-    console.log(this.campania);
     this.saveCampania().then(
       res =>{
         Swal.fire(
@@ -403,8 +287,6 @@ export class CampaniaAddModalComponent implements OnInit {
   
   onSubmitEjecutar(){
     this.convertirAWhatsAppText();
-    // this.setValues();
-    console.log(this.campania);
     this.saveCampania().then(
       res => {
         this.ejecutarCampania().then(
@@ -427,7 +309,6 @@ export class CampaniaAddModalComponent implements OnInit {
         this.campaniaService.onUpload(this.selectedFile).subscribe(
           response=>{
              if(response.status=='success'){
-               console.log(response);
                this.campaniaService.save(this.campania).subscribe(
                 (res:any) => {
                   this.campania = res;
@@ -469,7 +350,6 @@ export class CampaniaAddModalComponent implements OnInit {
     return new Promise((resolve, reject)=>{
       this.campaniaService.ejecutar(this.campania.id).subscribe(
         res => {
-          console.log(res);
           resolve(true);
           
         }, 

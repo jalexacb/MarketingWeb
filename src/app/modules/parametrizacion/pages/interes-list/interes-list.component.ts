@@ -26,11 +26,11 @@ export class InteresListComponent implements OnInit {
   spinner1 = 'sp_page';
   bsModalRef: BsModalRef;
   constructor(
-    // private spinner: NgxSpinnerService,
+    
     private spinner: NgxSpinnerService,
     private modalService: BsModalService,
     private interesService: InteresService,
-    // private modalService: NgbModal,
+    
     private loginService: LoginService,
     private permisoService: PermisoService,
   ) {
@@ -68,7 +68,7 @@ export class InteresListComponent implements OnInit {
     let qs = "";
     this.spinner.show(this.spinner1);
     if(this.busqueda != ''){
-      console.log("bus",this.busqueda);
+      
       
       qs += `&busqueda=${this.busqueda}`;
       
@@ -87,18 +87,9 @@ export class InteresListComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.interesService.getAll(`?per_page=${this.per_page}${qs}`).subscribe(
         (res:any) => {
-          console.log(res);
-          // this.advancePage = res.current_page;
           this.intereses = res.data;
-          // this.dataSource = new MatTableDataSource(this.usuarios);
-          // this.sortedData = this.usuarios.slice();
           this.collectionSize = res.total;
-          console.log(this.collectionSize);
-          // this.advancePage++;
           resolve(true);
-            /** spinner ends after 5 seconds */
-            // this.spinner.hide(this.spinner1);
-          
         },
         err => {
           reject();
@@ -128,10 +119,8 @@ export class InteresListComponent implements OnInit {
               'El interes ha sido activado',
               'success'
             )
-            
           }
           ,err => {
-    
           }
         );
        
@@ -146,21 +135,14 @@ export class InteresListComponent implements OnInit {
     this.permisoService.getPermisoByFilter(qs).subscribe(
       (res:Permiso) => {
         this.permiso = res;
-        console.log(res);
       }, 
       err => {
-
       }
     )
   }
 
   onChangePage(event){
     this.onSearch();
-    // this.spinner.show(this.spinner1);
-    // this.getInteres(event).then(
-    //   res => this.spinner.hide(this.spinner1),
-    //   err => this.spinner.hide(this.spinner1),
-    // )
   }
 
   onDelete(interes: Interes) {
@@ -196,35 +178,14 @@ export class InteresListComponent implements OnInit {
    
   }
 
-  // onCreate(){
-  //   const modalRef = this.modalService.open(InteresAddModalComponent, { size: 'sm' });
-  //   modalRef.componentInstance.name = 'World';
-  //   modalRef.result.then(
-  //     res => this.onSearch(),
-  //   );
-  // }
-
-  // onEdit(interes: Interes){
-  //   const modalRef = this.modalService.open(InteresEditModalComponent, { size: 'sm' });
-  //   modalRef.componentInstance.interes = interes;
-  //   modalRef.result.then(
-  //     res => this.onSearch(),
-  //   );
-    
-
-  // }
-
   onCreate(){
-    // const modalRef = this.modalService.open(UsuarioAddModalComponent, { size: 'lg' });
-    // modalRef.componentInstance.name = 'World';
-
     const initialState = {
     };
     this.bsModalRef = this.modalService.show(InteresAddModalComponent, {initialState, class: 'modal-sm', backdrop: 'static'});
     this.bsModalRef.content.sendRespuesta.subscribe(res =>{
       this.getInteres();
       this.advancePage = 1;
-      console.log("res",res);
+      
 
     });
   }
@@ -237,12 +198,8 @@ export class InteresListComponent implements OnInit {
     this.bsModalRef.content.sendRespuesta.subscribe(res =>{
         this.getInteres();
         this.advancePage = 1;
-        console.log("res",res);
-
       }
     
     );
   }
-
-
 }

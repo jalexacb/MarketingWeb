@@ -22,7 +22,7 @@ export class UsuarioEditModalComponent implements OnInit {
   
   constructor(
     
-    // public activeModal: NgbActiveModal,
+    
     public bsModalRef: BsModalRef,
     private usuarioService: UsuarioService,
     private spinner: NgxSpinnerService,
@@ -37,7 +37,7 @@ export class UsuarioEditModalComponent implements OnInit {
 
   getImage(event){
     this.selectedFile = event;
-    console.log("padre",this.selectedFile);
+    
   }
 
   isValidForm(){
@@ -71,7 +71,7 @@ export class UsuarioEditModalComponent implements OnInit {
 
   onSubmit(){
 
-    console.log(this.usuario);
+    
     this.spinner.show('sp_usuario_edit');
     this.usuarioService.update(this.usuario).subscribe(
       res => {
@@ -84,7 +84,7 @@ export class UsuarioEditModalComponent implements OnInit {
             
           this.usuarioService.onUpload(this.selectedFile).subscribe(
             response=>{
-              // resolve(true);
+              
               this.sendRespuesta.emit(true);
               this.spinner.hide('sp_usuario_edit');
               this.bsModalRef.hide();
@@ -92,16 +92,16 @@ export class UsuarioEditModalComponent implements OnInit {
             },
             error=>{
               this.spinner.hide('sp_usuario_edit');
-              // reject();
-              console.log(<any>error);
+              
+              
             }      
           );  
         }else{
           this.spinner.hide('sp_usuario_edit');
-          // resolve(true);
+          
           this.bsModalRef.hide();
         }
-        // this.bsModalRef.hide();
+        
       },
       err => {
 

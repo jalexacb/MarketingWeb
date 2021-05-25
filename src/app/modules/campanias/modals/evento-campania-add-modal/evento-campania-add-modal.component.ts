@@ -70,10 +70,10 @@ export class EventoCampaniaAddModalComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.campaniaService.getAll(qs).subscribe(
         (res:any) => {
-          console.log(res);
+          ¡
           this.campanias = res;
           // this.collectionSize = res.total;
-          // console.log(this.collectionSize);
+          // ¡
           resolve(true);
         },
         err => {
@@ -89,14 +89,14 @@ export class EventoCampaniaAddModalComponent implements OnInit {
   }
 
   onChangeFechaInicio(){
-    console.log("hola");
+    ¡
     this.fecha_fin = null;
   }
 
   onSubmit(){
     this.spinner.show(this.spinner1);
     this.setValues();
-    console.log(this.eventoCampania.fecha_inicio);
+    ¡
     this.eventoCampaniaService.save(this.eventoCampania).subscribe(
       res => {
         Swal.fire(

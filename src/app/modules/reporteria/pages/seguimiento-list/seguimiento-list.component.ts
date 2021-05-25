@@ -15,7 +15,7 @@ import * as moment from 'moment';
   selector: 'app-seguimiento-list',
   templateUrl: './seguimiento-list.component.html',
   styleUrls: ['./seguimiento-list.component.scss'],
-  encapsulation: ViewEncapsulation.None // Add this line
+  encapsulation: ViewEncapsulation.None 
 })
 export class SeguimientoListComponent implements OnInit {
   public canales: Array<Canal>;
@@ -46,7 +46,7 @@ export class SeguimientoListComponent implements OnInit {
     this.seguimientos = [];
     this.permiso = new Permiso();
     this.busqueda = "";
-    // this.paginatorp.itemsPerPageLabel = ""
+    
     this.advancePage = 1;
     this.per_page = 5;
     this.settingsSelect = {
@@ -61,7 +61,7 @@ export class SeguimientoListComponent implements OnInit {
     let now = moment();
     this.interesesSeleccionados = [];
     this.canalesSeleccionados = [];
-    // this.fecha_actual = 
+    
     this.fecha_inicio_seguimiento = moment(moment().startOf('year'), moment.ISO_8601).format();
     this.fecha_fin_seguimiento = moment(now.format(), moment.ISO_8601).format();
   }
@@ -80,13 +80,10 @@ export class SeguimientoListComponent implements OnInit {
       .catch(error => this.spinner.hide());
   }
 
-  
-
   getCanales(){
     return new Promise((resolve, reject) => {
       this.canalService.getAll('?status=A').subscribe(
         (res:any) => {
-          console.log(res);
           this.canales = res;
           resolve(true);
         },
@@ -101,10 +98,7 @@ export class SeguimientoListComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.interesService.getAll('?status=A').subscribe(
         (res:any) => {
-          console.log(res);
-         
           this.intereses = res;
-          
           resolve(true);
         },
         err => {
@@ -155,57 +149,28 @@ export class SeguimientoListComponent implements OnInit {
 
   onCanalSelect(item: any) {
     this.onSearch();
-    console.log(item);
-  //  et intereses = [];
-  //   this.campania.intereses.forEach(interes => {
-  //     intereses.push(interes.nombre);
-  //   });
-
-  //   this.getRecomendacion(int lereses);
   }
 
   onCanalDeSelect(item: any) {
     this.onSearch();
-    console.log(item);
-  //  et intereses = [];
-  //   this.campania.intereses.forEach(interes => {
-  //     intereses.push(interes.nombre);
-  //   });
-
-  //   this.getRecomendacion(int lereses);
   }
 
   onSelectAllCanales(items: any) {
    
     this.canalesSeleccionados = items;
-    console.log(items);
+    
     this.onSearch();
   }
 
   onInteresSelect(item: any) {
     this.onSearch();
-    console.log(item);
-  //  et intereses = [];
-  //   this.campania.intereses.forEach(interes => {
-  //     intereses.push(interes.nombre);
-  //   });
-
-  //   this.getRecomendacion(int lereses);
   }
   onInteresDeSelect(item: any) {
     this.onSearch();
-    console.log(item);
-  //  et intereses = [];
-  //   this.campania.intereses.forEach(interes => {
-  //     intereses.push(interes.nombre);
-  //   });
-
-  //   this.getRecomendacion(int lereses);
   }
 
   onSelectAllInteres(items: any) {
     
-    console.log(items);
     this.interesesSeleccionados = items;
     this.onSearch();
   }
@@ -221,13 +186,13 @@ export class SeguimientoListComponent implements OnInit {
 
   getCampanias(qs: String = ""){
     return new Promise((resolve, reject) => {
-      console.log(qs);
+      
       this.campaniaService.getReporteSeguimiento(`?per_page=${this.per_page}${qs}`).subscribe(
         (res:any) => {
-          console.log(res);
+          
           this.seguimientos = res.data;
           this.collectionSize = res.total;
-          console.log(this.collectionSize);
+          
           resolve(true);
         },
         err => {
@@ -251,25 +216,25 @@ export class SeguimientoListComponent implements OnInit {
     }
   }
 
-  // onSearch(event:any = null){
-  //   let qs = "";
-  //   if(this.busqueda != ''){
-  //     console.log("bus",this.busqueda);
-  //     this.spinner.show();
-  //     qs += `&busqueda=${this.busqueda}`;
+  
+  
+  
+  
+  
+  
       
-  //   }
-  //   if (event != null) {
-  //     qs += `&page=${event}`;
-  //   }
+  
+  
+  
+  
 
-  //   this.getCampanias(qs).then(
-  //     res => this.spinner.hide(),
-  //     err => this.spinner.hide(),
-  //   );
-  // }
+  
+  
+  
+  
+  
   onChangePage(event){
-    // this.spinner.show();
+    
     this.onSearch(event);
   }
 

@@ -1,5 +1,3 @@
-// import { Component, OnInit } from '@angular/core';
-
 import {
   Component,
   OnInit,
@@ -68,7 +66,7 @@ export class ProgramacionComponent implements OnInit {
   public eventosCampanias: Array<EventoCampania>;
   
   ngOnInit() {
-    // this.spinner.show();
+    
     let p1 = this.getEventosCampanias();
     let p2 = this.getPermiso();
 
@@ -156,7 +154,7 @@ export class ProgramacionComponent implements OnInit {
   constructor(
     private modal: NgbModal,
     
-    // private contactoService: ContactoService,
+    
     private eventoCampaniaService: EventoCampaniaService,
     private spinner: NgxSpinnerService,
     private modalService: NgbModal,
@@ -169,7 +167,7 @@ export class ProgramacionComponent implements OnInit {
 
     this.permiso = new Permiso();
     this.busqueda = "";
-    // this.paginatorp.itemsPerPageLabel = ""
+    
     this.advancePage = 1;
     this.per_page = 5;
     this.eventosCampanias = [];
@@ -241,8 +239,6 @@ export class ProgramacionComponent implements OnInit {
     this.activeDayIsOpen = false;
   }
 
-
-
   getPermiso(){
     let usuario:any = this.loginService.getUsuarioIdentificado();
     let rol_id = usuario.rol_id;
@@ -250,7 +246,7 @@ export class ProgramacionComponent implements OnInit {
     this.permisoService.getPermisoByFilter(qs).subscribe(
       (res:Permiso) => {
         this.permiso = res;
-        console.log("permiso",res);
+        
       }, 
       err => {
 
@@ -279,7 +275,7 @@ export class ProgramacionComponent implements OnInit {
   onSearch(event:any = null){
     let qs = "";
     if(this.busqueda != ''){
-      console.log("bus",this.busqueda);
+      
       this.spinner.show();
       qs += `&busqueda=${this.busqueda}`;
       
@@ -302,11 +298,11 @@ export class ProgramacionComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.eventoCampaniaService.getAll(`?per_page=${this.per_page}${qs}`).subscribe(
         (res:any) => {
-          console.log(res);
+          
           this.eventosCampanias = res.data;
-          console.log(this.eventosCampanias);
+          
           this.collectionSize = res.total;
-          console.log(this.collectionSize);
+          
           resolve(true);
         },
         err => {
@@ -322,8 +318,5 @@ export class ProgramacionComponent implements OnInit {
     modalRef.result.then(
       res => this.onSearch(),
     );
-    // modalRef.dismiss.then(
-    //   res => this.onSearch(),
-    // );
   }
 }

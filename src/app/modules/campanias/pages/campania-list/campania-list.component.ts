@@ -15,7 +15,6 @@ import Swal from 'sweetalert2';
 import { CampaniaEditModalComponent } from '../../modals/campania-edit-modal/campania-edit-modal.component';
 
 
-
 @Component({
   selector: 'app-campania-list',
   templateUrl: './campania-list.component.html',
@@ -57,13 +56,13 @@ export class CampaniaListComponent implements OnInit {
   getPermiso(){
     let usuario:any = this.loginService.getUsuarioIdentificado();
           let rol_id = usuario.rol_id;
-          // let qs = "?
+          
     let qs = "?usuario_id="+localStorage.getItem('usuario_id')+"&menu_id="+localStorage.getItem('menu_id')+"&rol_id="+rol_id;
     return new Promise((resolve, reject)=>{
       this.permisoService.getPermisoByFilter(qs).subscribe(
         (res:Permiso) => {
           this.permiso = res;
-          console.log(res);
+          
           resolve(true);
         }, 
         err => {
@@ -73,64 +72,27 @@ export class CampaniaListComponent implements OnInit {
     });
   }
 
-  // getImagen(url){
-    
-  //   this.campaniaService.getImage('?imagen='+url).subscribe(
-  //     (res:any) =>{
-  //       console.log("recomendación1",res);
-  //       this.url_imagen = res;
-        
-  //     }
-  //   )
-
-  //   return this.url_imagen;
-  // }
-
   getRecomendacion(){
     
     this.campaniaService.getRecomendacion().subscribe(
       (res:any) =>{
-        console.log("recomendación1",res);
+        
         let campaniasRecomendadas:any = Object.values(res);
-        // let campaniasRecomendadas:any = Object.values(res); // valores = ["Scott", "Negro", true, 5];
-        // console.log("recomendacion2",contactosRecomendados);
-        // for(let i=0; i< contactosRecomendados.length; i++){
-        //   console.log("recomendacion3",contactosRecomendados[i]);
-        // }
-        // this.campania.contactos = [];
         this.campanias.forEach(campania => {
           let campaniaRecomendado = campaniasRecomendadas.filter(campaniaR=>campania.id === campaniaR.id)[0];
-          // contactoRecomendado.seleccionado = true;
+          
           if(campaniaRecomendado){
             campania.recomendado = true;
           }else{
             campania.recomendado = false;
           }
-          
-          // this.campania.contactos.push(contactoRecomendado);
         });
-        // this.isSelectedAll = true;
-        // this.campania.contactos.forEach(contacto => {
-        //   console.log("co", this.contactos);
-        //   let contactoSeleccionado = this.contactos.filter(c=> c.id === contacto.id)[0];
-        //   if(contactoSeleccionado){
-        //     contactoSeleccionado.seleccionado = true;
-        //   } else {
-        //     this.isSelectedAll = false;
-        //   }
-           
-        // });
-        console.log(this.campanias);
-        // this.contactos.forEach(contacto => {
-        //   if(contacto.nombres === res.nombre)
-        // });
-        
       }
     )
   }
 
   getHtmlFormat(string){
-    // html formatter
+    
     const htmlFormat = [
       { symbol: '*', tag: 'b' },
       { symbol: '_', tag: 'em' },
@@ -160,21 +122,9 @@ export class CampaniaListComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.campaniaService.getAll().subscribe(
         (res:any) => {
-          console.log(res);
+          
           this.campanias = res;
           this.getRecomendacion();
-          // this.campanias.forEach(campania => {
-          //   // this.campaniaService.getImage('?imagen='+campania.url_media).subscribe(
-          //   //   (res:any) =>{
-          //   //     console.log("recomendación1",res);
-          //   //     this.url_imagen = res;
-                
-          //   //   }
-          //   // )
-          // });
-          
-          // this.collectionSize = res.total;
-          // console.log(this.collectionSize);
           resolve(true);
         },
         err => {
@@ -187,7 +137,7 @@ export class CampaniaListComponent implements OnInit {
   listen(){
     this.echo.private('test-channel')
       .listen('.CompaniaCreadaEvent', (e)=>{
-        console.log(e);
+        
         alert("Evento escuchado");
       });
   }
@@ -210,18 +160,13 @@ export class CampaniaListComponent implements OnInit {
   }
   onKeyBackSpace(){
     if(this.busqueda == ''){
-      // this.spinner.show();
-      // this.getUsuarios().then(
-      //   res => this.spinner.hide(),
-      //   err => this.spinner.hide(),
-      // );
     }
   }
 
   onSearch(event:any = null){
     let qs = "";
     if(this.busqueda != ''){
-      console.log("bus",this.busqueda);
+      
       this.spinner.show();
       qs += `&busqueda=${this.busqueda}`;
       
@@ -239,7 +184,7 @@ export class CampaniaListComponent implements OnInit {
     this.spinner.show();
     this.campaniaService.ejecutar(id).subscribe(
       res => {
-        console.log(res);
+        
         Swal.fire(
           'Ejecutada',
           'Se ha ejecutado con éxito',
@@ -260,7 +205,7 @@ export class CampaniaListComponent implements OnInit {
     this.spinner.show();
     this.campaniaService.archivar(id).subscribe(
       res => {
-        console.log(res);
+        
         Swal.fire(
           'Archivada',
           'Se ha archivado con éxito',
@@ -281,7 +226,7 @@ export class CampaniaListComponent implements OnInit {
     this.spinner.show();
     this.campaniaService.activar(id).subscribe(
       res => {
-        console.log(res);
+        
        
         Swal.fire(
           'Activada',

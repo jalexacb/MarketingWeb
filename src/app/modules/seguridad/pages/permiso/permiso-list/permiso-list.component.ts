@@ -29,11 +29,6 @@ export class PermisoListComponent implements OnInit {
   public permiso: Permiso;
   public isEditable: boolean;
   spinner1 = 'sp_page';
-  // sortedData: Usuario[];
-  // public busqueda: String;
-  // @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-
-  // @ViewChild(MatSort, { static: false}) sort: MatSort;
   constructor(
     private modalService: NgbModal,
     private usuarioService: UsuarioService,
@@ -41,12 +36,7 @@ export class PermisoListComponent implements OnInit {
     private menuService: MenuService,
     private permisoService: PermisoService,
     private spinner: NgxSpinnerService,
-    
     private loginService: LoginService,
-
-    // private usuarioService: UsuarioService,
-    // private spinner: NgxSpinnerService,
-    // private paginatorp: MatPaginatorIntl
   ) {
     this.usuarios = [];
     this.menus = [];
@@ -56,24 +46,10 @@ export class PermisoListComponent implements OnInit {
     this.rol = new Rol();
     this.tipo = "";
     this.isEditable = false;
-    // this.busqueda = "";
-    // this.paginatorp.itemsPerPageLabel = ""
-    // this.paginatorp.la
   }
-
-
-
-  // // ngAfterViewInit() {
-  // //   this.dataSource.sort = this.sort;
-
-  // // }
+  
   ngOnInit() {
-    // this.spinner.show();
-    
-    
-    
     this.getPermiso();
-
     this.spinner.show(this.spinner1);
     let p1 = this.getUsuarios();
     let p2 = this.getRoles();
@@ -83,10 +59,6 @@ export class PermisoListComponent implements OnInit {
     Promise.all([p1, p2,p3,p4])
       .then(result => this.spinner.hide(this.spinner1))
       .catch(error => this.spinner.hide(this.spinner1));
-    // setTimeout(() => {
-    //   /** spinner ends after 5 seconds */
-    //   this.spinner.show(this.spinner1);
-    // }, 5000);
   }
 
   getPermiso(){
@@ -96,7 +68,7 @@ export class PermisoListComponent implements OnInit {
     this.permisoService.getPermisoByFilter(qs).subscribe(
       (res:Permiso) => {
         this.permiso = res;
-        console.log("permiso",res);
+        
       }, 
       err => {
 
@@ -112,26 +84,20 @@ export class PermisoListComponent implements OnInit {
   }
   openModalUsuarios(content){
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      // this.closeResult = `Closed with: ${result}`;
-      console.log("cerrado");
+      
+      
     }, (reason) => {
-      // this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      
     });
   }
   getUsuarios(qs: String = "") {
-    // this.spinner.show();
+    
     return new Promise((resolve, reject) => {
       qs = "?status=A";
       this.usuarioService.getAll(qs).subscribe(
         (res: Array<Usuario>) => {
-          console.log(res);
           this.usuarios = res;
-          // this.dataSource = new MatTableDataSource(this.usuarios);
-          // this.sortedData = this.usuarios.slice();
           resolve(true);
-            /** spinner ends after 5 seconds */
-            // this.spinner.show(this.spinner1);
-
         },
         err => {
           reject();
@@ -156,7 +122,7 @@ export class PermisoListComponent implements OnInit {
           this.spinner.hide(this.spinner1);
          
           this.setMenusPemrisos();
-          // this.advancePage++;
+          
           resolve(true);
         },
         err => {
@@ -176,10 +142,10 @@ export class PermisoListComponent implements OnInit {
   setMenusPemrisos(){
     if(this.permisos.length > 0){
       this.permisos.forEach(permiso =>{
-        // let menu:any = this.menus.filter(m => m.id == permiso.menu_id);
+        
         this.menus.forEach(menu =>{
           if(menu.id == permiso.menu_id){
-            console.log(menu);
+            
             menu.activado = true;
             menu.ver = permiso.ver;
             menu.crear = permiso.crear;
@@ -192,14 +158,14 @@ export class PermisoListComponent implements OnInit {
       });
     }else{
       this.menus.forEach(menu =>{
-        // if(menu.id == permiso.menu_id){
-          console.log(menu);
+        
+          
           menu.activado = false;
           menu.ver = false
           menu.crear = false;
           menu.editar = false;
           menu.eliminar = false;
-        // }
+        
       });
     }
     
@@ -212,13 +178,7 @@ export class PermisoListComponent implements OnInit {
         (res: any) => {
 
           this.roles = res;
-          console.log(res);
-          // this.advancePage = res.current_page;
-          // this.usuarios = res.data;
-          // this.dataSource = new MatTableDataSource(this.usuarios);
-          // this.sortedData = this.usuarios.slice();
-
-          // this.advancePage++;
+          
           resolve(true);
         },
         err => {
@@ -233,7 +193,7 @@ export class PermisoListComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.menuService.getAllMenus().subscribe( (res:any) => {
         this.menus = res;
-        console.log(res);
+        
         resolve(true);
       });
     });
@@ -253,8 +213,8 @@ export class PermisoListComponent implements OnInit {
       menu.ver = (menu.ver||menu.crear||menu.editar||menu.eliminar)?true:false;
     }
 
-    console.log("debug",menu.ver);
-    // menu.ver = (menu.crear||menu.editar||menu.eliminar)?true:false;
+    
+    
     menu.todos = (menu.ver&&menu.crear&&menu.editar&&menu.eliminar)?true:false;
     menu.activado = (menu.ver||menu.crear || menu.editar || menu.eliminar)?true:false;
     let padre = this.menus.filter(m=>m.id == menu.padre_id)[0];
@@ -267,7 +227,7 @@ export class PermisoListComponent implements OnInit {
     if(!padre.activado){
       padre.activado = true;
     }else if(!this.isTodosHijosMenu(menu.padre_id)){
-      console.log("desactivar padre");
+      
       padre.activado = false;
     }
   }
@@ -298,8 +258,6 @@ export class PermisoListComponent implements OnInit {
         permiso.editar = menu.editar;
         permiso.eliminar = menu.eliminar;
         permiso.usuario_ingresa_id = localStorage.getItem('usuario_id');
-        console.log(permiso);
-        console.log(menu);
         this.permisos.push(permiso);
       }
     });
@@ -308,7 +266,7 @@ export class PermisoListComponent implements OnInit {
 
   onSubmit(){
     this.setValues();
-    console.log(this.permisos);
+    
     return new Promise( (resolve, reject) => {
       this.permisoService.save(this.permisos).subscribe(
         res => {
@@ -317,7 +275,7 @@ export class PermisoListComponent implements OnInit {
             'Se ha guardado con éxito',
             'success'
           )
-          console.log("Se ha guardado");
+          
           this.permisos = [];
           resolve(true);
         },

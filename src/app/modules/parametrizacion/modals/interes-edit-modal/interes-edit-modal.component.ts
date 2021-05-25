@@ -32,7 +32,7 @@ export class InteresEditModalComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.interes);
+    
     this.spinner.show(this.spinner1);
     this.interesService.update(this.interes).subscribe(
       res => {

@@ -22,7 +22,7 @@ export class UsuarioFrmComponent implements OnInit {
   
   public nombre_archivo: string;
   public is_permitido: boolean;
-  // public is_existente: boolean;
+  
   constructor(
     private rolService: RolService,
     private usuarioService: UsuarioService,
@@ -31,11 +31,11 @@ export class UsuarioFrmComponent implements OnInit {
     
     this.nombre_archivo = "";
     this.is_permitido = true;
-    // this.is_existente = false;
+    
   }
 
   ngOnInit() {
-    // this.usuario = new Usuario();
+    
     this.fecha = moment();
     this.getRoles();
   }
@@ -67,7 +67,7 @@ export class UsuarioFrmComponent implements OnInit {
   getUsuarioNombre(){
     let nombres = this.usuario.nombres.toLowerCase().split(' ');
     let apellidos = this.usuario.apellidos.toLowerCase().split(' ');
-    // console.log(nombres);
+    
     let inicialNombre2 ="";
     let usuario = '';
     if(!this.is_edit){
@@ -121,7 +121,7 @@ export class UsuarioFrmComponent implements OnInit {
     this.rolService.getAll().subscribe(
       (res:any) => {
         this.roles = res;
-        console.log(this.roles);
+        
       },
       err => {
 

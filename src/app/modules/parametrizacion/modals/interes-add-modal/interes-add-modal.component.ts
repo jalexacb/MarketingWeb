@@ -34,7 +34,7 @@ export class InteresAddModalComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.interes);
+    
     this.spinner.show(this.spinner1);
     this.interesService.save(this.interes).subscribe(
       res => {

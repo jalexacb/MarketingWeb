@@ -1,19 +1,10 @@
 import { AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UsuarioService } from 'src/app/core/services/usuario.service';
-
-
 import { Usuario } from 'src/app/theme/shared/models/Usuario';
-
-// import {MatSort, Sort} from '@angular/material/sort';
-// import {MatTableDataSource} from '@angular/material/table';
-// import {MatPaginator, MatPaginatorIntl} from '@angular/material/paginator';
 import { NgbdSortableHeader, SortEvent } from 'src/app/theme/shared/directives/sortable.directive';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioAddModalComponent } from 'src/app/modules/seguridad/modals/usuario-add-modal/usuario-add-modal.component';
-
-
-
 import Swal from 'sweetalert2'
 import { UsuarioEditModalComponent } from '../../../modals/usuario-edit-modal/usuario-edit-modal.component';
 import { LoginService } from 'src/app/core/services/login.service';
@@ -27,8 +18,6 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
   styleUrls: ['./usuario-list.component.scss']
 })
 
-
-
 export class UsuarioListComponent implements OnInit {
   public usuarios: Array<Usuario>;
   sortedData: Usuario[];
@@ -40,38 +29,26 @@ export class UsuarioListComponent implements OnInit {
   public currentPage: number;
   spinner1 = 'sp_page';
   bsModalRef: BsModalRef;
-  // @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-
-  // @ViewChild(MatSort, { static: false}) sort: MatSort;
   @ViewChildren(NgbdSortableHeader) headers: QueryList<NgbdSortableHeader>;
   constructor(
     private usuarioService: UsuarioService,
     private spinner: NgxSpinnerService,
-    // private modalService: NgbModal,
+    
     private loginService: LoginService,
     private permisoService: PermisoService,
     private menuService: MenuService,
 
     private modalService: BsModalService,
-    // private paginatorp: MatPaginatorIntl
+    
   ) { 
     this.permiso = new Permiso();
     this.usuarios = [];
     this.busqueda = "";
-    // this.paginatorp.itemsPerPageLabel = ""
+    
     this.advancePage = 1;
     this.per_page = 5;
-    
-    // this.collectionSize = 0;
-    // this.paginatorp.la
   }
 
-
-
-  // ngAfterViewInit() {
-  //   this.dataSource.sort = this.sort;
-
-  // }
   ngOnInit() {
     this.spinner.show(this.spinner1);
     let p1 = this.getUsuarios();
@@ -91,7 +68,7 @@ export class UsuarioListComponent implements OnInit {
       this.permisoService.getPermisoByFilter(qs).subscribe(
         (res:Permiso) => {
           this.permiso = res;
-          console.log(res);
+          
           resolve(true);
         }, 
         err => {
@@ -102,30 +79,16 @@ export class UsuarioListComponent implements OnInit {
      
   }
 
-  onClick(event){
-    console.log(event);
-    
-  }
-
   onChangePage(event){
-    // this.spinner.show(this.spinner1);
     this.onSearch(event);
-    // this.getUsuarios(event).then(
-    //   res => this.spinner.hide(this.spinner1),
-    //   err => this.spinner.hide(this.spinner1),
-    // )
   }
 
   onSort({column, direction}: SortEvent) {
-
-    // resetting other headers
     this.headers.forEach(header => {
       if (header.sortable !== column) {
         header.direction = '';
       }
     });
-
-    // sorting countries
     if (direction === '' || column === '') {
       this.usuarios = this.usuarios;
     } else {
@@ -137,26 +100,14 @@ export class UsuarioListComponent implements OnInit {
   }
 
   getUsuarios(qs: String = "") {
-    // this.spinner.show(this.spinner1);
-    // this.
-    // console.log("current",event);
-    // qs = ;
-    // this.spinner.show(this.spinner1);
     return new Promise((resolve, reject) => {
       this.usuarioService.getAll(`?per_page=${this.per_page}${qs}`).subscribe(
         (res:any) => {
-          console.log(res);
-          // this.advancePage = res.current_page;
           this.usuarios = res.data;
-          // this.dataSource = new MatTableDataSource(this.usuarios);
+          
           this.sortedData = this.usuarios.slice();
           this.collectionSize = res.total;
-          console.log(this.collectionSize);
-          // this.advancePage++;
           resolve(true);
-            /** spinner ends after 5 seconds */
-            // this.spinner.hide(this.spinner1);
-          
         },
         err => {
           reject();
@@ -180,10 +131,7 @@ export class UsuarioListComponent implements OnInit {
     let qs = "";
     this.spinner.show(this.spinner1);
     if(this.busqueda != ''){
-      console.log("bus",this.busqueda);
-      
       qs += `&busqueda=${this.busqueda}`;
-      
     }
     if (event != null) {
       qs += `&page=${event}`;
@@ -261,45 +209,25 @@ export class UsuarioListComponent implements OnInit {
   }
 
   onCreate(){
-    // const modalRef = this.modalService.open(UsuarioAddModalComponent, { size: 'lg' });
-    // modalRef.componentInstance.name = 'World';
-
     const initialState = {
     };
     this.bsModalRef = this.modalService.show(UsuarioAddModalComponent, {initialState, class: 'modal-lg', backdrop: 'static'});
   }
 
-
-
   onEdit(usuario: Usuario){
-    // const modalRef = this.modalService.open(UsuarioEditModalComponent, { size: 'lg' });
-    // modalRef.componentInstance.usuario = usuario;
-    // modalRef.componentInstance.sendRespuesta.subscribe(result => {
-    //   console.log(result);
-    //   if(result) {
-
-    //   }
-    // });
     const initialState = { 
       usuario: usuario
     };
     this.bsModalRef = this.modalService.show(UsuarioEditModalComponent, {initialState, class: 'modal-lg', backdrop: 'static'});
     this.bsModalRef.content.sendRespuesta.subscribe(res =>{
       this.getUsuarios();
-        console.log("res",res);
+        
         this.advancePage = 1;
-    }
-    
-    );
+    });
     
 
   }
 
 }
-
-// function compare(a: number | string | String, b: number | string | String, isAsc: boolean) {
-//   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
-// }
-
 
 const compare = (v1: string | number, v2: string | number) => v1 < v2 ? -1 : v1 > v2 ? 1 : 0;

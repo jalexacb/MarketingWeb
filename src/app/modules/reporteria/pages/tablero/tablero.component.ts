@@ -14,7 +14,7 @@ export class TableroComponent implements OnInit {
   @ViewChild('chartCanales', {static:true}) chartCanales: ChartCircularComponent;
   @ViewChild('chartIntereses', {static:true}) chartIntereses: ChartCircularComponent;
   public totales: any;
-  // public 
+  
   public campania = {
     detalle: {
 
@@ -44,7 +44,7 @@ export class TableroComponent implements OnInit {
     private interesService: InteresService,
     private spinner: NgxSpinnerService,
   ) { 
-    // this.Ca = 0;
+    
     this.totales = {
       campanias_ejecutadas: 0,
       campanias_programadas: 0,
@@ -55,15 +55,15 @@ export class TableroComponent implements OnInit {
     }
     this.totalCanales = 0;
     this.totalIntereses = 0;
-    // this.canalesTotales = [
-    //   {nombre: 'SMS', cantidad: 10},
-    //   {nombre: 'WhatsApp', cantidad: 10},
-    // ];
+    
+    
+    
+    
     this.canalesTotales = [];
     this.interesesTotales = [];
     this.canalesUltimaCampania = [];
     this.campanias = [];
-    // this.ultimaCampania = null;
+    
   }
 
   ngOnInit() {
@@ -106,7 +106,7 @@ export class TableroComponent implements OnInit {
         res => {
           this.ultimaCampania = res['campania'];
           this.canalesUltimaCampania = res ['canales'];
-          console.log(res['campania']);
+          
           resolve(true);
         }, err => {
           reject();
@@ -121,8 +121,8 @@ export class TableroComponent implements OnInit {
       this.campaniaService.getReporteSeguimiento().subscribe(
         (res:any) => {
           this.campanias = res;
-          // this.canalesUltimaCampania = res ['canales'];
-          console.log(res);
+          
+          
           resolve(true);
         }, err => {
           reject();
@@ -139,8 +139,8 @@ export class TableroComponent implements OnInit {
           this.canalesTotales = res['canales'];
           this.totalCanales = res['total'];
           this.chartCanales.updateDataChart(this.canalesTotales);
-          // this.canalesUltimaCampania = res ['canales'];
-          console.log(res);
+          
+          
           resolve(true);
         }, err => {
           reject();
@@ -157,8 +157,8 @@ export class TableroComponent implements OnInit {
           this.interesesTotales = res['intereses'];
           this.totalIntereses = res['total'];
           this.chartIntereses.updateDataChart(this.interesesTotales);
-          // this.canalesUltimaCampania = res ['canales'];
-          console.log("intereses", this.interesesTotales);
+          
+         
           resolve(true);
         }, err => {
           reject();

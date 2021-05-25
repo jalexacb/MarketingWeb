@@ -20,7 +20,6 @@ import Swal from 'sweetalert2'
 export class RolListComponent implements OnInit {
   public roles: Array<any>;
   public permiso: Permiso;
-  // sortedData: Usuario[];
   public busqueda: String;
   public advancePage: number;
   public collectionSize: number;
@@ -31,11 +30,9 @@ export class RolListComponent implements OnInit {
   constructor(
     private rolService: RolService,
     private spinner: NgxSpinnerService,
-    // private modalService: NgbModal,
     private modalService: BsModalService,
     private loginService: LoginService,
     private permisoService: PermisoService,
-
   ) { 
     this.roles = [];
     this.busqueda = "";
@@ -53,11 +50,6 @@ export class RolListComponent implements OnInit {
     Promise.all([p1, p2])
       .then(result => this.spinner.hide(this.spinner1))
       .catch(error => this.spinner.hide(this.spinner1));
-    // this.getPermiso();
-    // setTimeout(() => {
-    //   /** spinner ends after 5 seconds */
-    //   this.spinner.hide();
-    // }, 5000);
   }
   getPermiso(){
     let usuario:any = this.loginService.getUsuarioIdentificado();
@@ -66,7 +58,7 @@ export class RolListComponent implements OnInit {
     this.permisoService.getPermisoByFilter(qs).subscribe(
       (res:Permiso) => {
         this.permiso = res;
-        console.log(res);
+        
       }, 
       err => {
 
@@ -88,10 +80,7 @@ export class RolListComponent implements OnInit {
     let qs = "";
     this.spinner.show(this.spinner1);
     if(this.busqueda != ''){
-      console.log("bus",this.busqueda);
-      // this.spinner.show();
       qs += `&busqueda=${this.busqueda}`;
-      
     }
     if (event != null) {
       qs += `&page=${event}`;
@@ -105,19 +94,15 @@ export class RolListComponent implements OnInit {
 
 
   getRoles(qs: String = ""){
-    // this.spinner.show(this.spinner1);
+    
     return new Promise((resolve, reject) => {
       this.rolService.getAll(`?per_page=${this.per_page}${qs}`).subscribe(
         (res:any) => {
-          console.log(res);
           this.roles = res.data;
           this.collectionSize = res.total;
-          console.log(this.collectionSize);
-          
           resolve(true);
         },
         err => {
-          // this.spinner.hide(this.spinner1);
           reject();
         }
       );
@@ -149,7 +134,6 @@ export class RolListComponent implements OnInit {
               'El rol ha sido activado',
               'success'
             )
-            
           }
           ,err => {
     
@@ -199,32 +183,19 @@ export class RolListComponent implements OnInit {
     this.bsModalRef = this.modalService.show(RolEditModalComponent, Object.assign({initialState, class: 'modal-sm', backdrop: 'static'}));
     this.bsModalRef.content.sendRespuesta.subscribe(res =>{
         this.getRoles();
-        console.log("res",res);
+        
       }
     
     );
   }
-
-  // onEdit(rol){
-  //   const modalRef = this.modalService.open(RolEditModalComponent);
-  //   modalRef.componentInstance.rol = rol;
-  //   modalRef.componentInstance.sendRespuesta.subscribe(result => {
-  //     console.log(result);
-  //     if(result) {
-  //       this.getRoles();
-  //     }
-  //   });
-  // }
+  
   onCreate(){
-    // const modalRef = this.modalService.open(UsuarioAddModalComponent, { size: 'lg' });
-    // modalRef.componentInstance.name = 'World';
-
     const initialState = {
     };
     this.bsModalRef = this.modalService.show(RolAddModalComponent, {initialState, class: 'modal-sm', backdrop: 'static'});
     this.bsModalRef.content.sendRespuesta.subscribe(res =>{
       this.getRoles();
-      console.log("res",res);
+      
       this.advancePage = 1;
     }
   

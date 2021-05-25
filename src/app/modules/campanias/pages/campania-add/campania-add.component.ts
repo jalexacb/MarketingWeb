@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Step, StepperProgressBarController } from 'stepper-progress-bar';
-// import { StepProgressBarComponent } from 'step-progress-bar/lib/step-progress-bar/step-progress-bar.component';
+
 import { trigger, style, animate, transition } from '@angular/animations';
 import { CanalService } from 'src/app/core/services/canal.service';
 import { ContactoService } from 'src/app/core/services/contacto.service';
@@ -24,11 +24,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./campania-add.component.scss']
 })
 export class CampaniaAddComponent implements OnInit {
-  // @ViewChild('editable', { static: true }) editable: ElementRef;
   dropdownList = [];
   selectedItems = [];
-  dropdownSettings = {}
-  // editor: any;
+  dropdownSettings = {};
   public step: number;
   public objetivos: Array<Objetivo>;
   public canales: Array<Canal>;
@@ -42,26 +40,12 @@ export class CampaniaAddComponent implements OnInit {
   public settings={};
   public contactosSettings={};
   public interesesSettings={};
-  // public isSelectedAll: boolean;
   public nombre_archivo: string;
   public nombre: string = '';
   public spinner1: string = 'sp_campania_edit'; 
   public path_logo = '';
   public link = '';
   public is_permitido: boolean;
-//   ,'paragraphFormat','alert'
-// ,'paragraphFormat','alert'
-// ,'paragraphFormat','alert'
-// ,'paragraphFormat','alert'
-  // public froala_options: Object = {
-  //   charCounterCount: false,
-  //   toolbarButtons: ['bold', 'italic','strikeThrough'],
-  //   toolbarButtonsXS: ['bold', 'italic','strikeThrough'],
-  //   toolbarButtonsSM: ['bold', 'italic','strikeThrough'],
-  //   toolbarButtonsMD: ['bold', 'italic','strikeThrough'],
-  //   pluginsEnabled: [], 
-
-  // }
   public selectedFile: File;
   constructor(
     private spinner: NgxSpinnerService,
@@ -84,14 +68,8 @@ export class CampaniaAddComponent implements OnInit {
     this.campania = new Campania();
     this.nombre_archivo = "";
     this.is_permitido = false;
-    // this.isSelectedAll = false;
+    
   }
-
-  
-  // ngAfterViewInit(): void {
-  //   this.editor = new MediumEditor(this.editable.nativeElement);
-  // }
-
   ngOnInit() {
     this.spinner.show(this.spinner1);
     let p1 = this.getCanales();
@@ -115,121 +93,40 @@ export class CampaniaAddComponent implements OnInit {
         { item_id: 3, item_text: 'Pune' },
         { item_id: 4, item_text: 'Navsari' }
       ];
-      // this.settings = {
-      //   singleSelection: false,
-      //   idField: 'id',
-      //   textField: 'nombre',
-      //   selectAllText: 'Seleccione todo',
-      //   unSelectAllText: 'Deseleccione todo',
-      //   itemsShowLimit: 3,
-      //   // allowSearchFilter: true
-      // };
+      
   }
 
- //...
-  // addAllContacto(){
-  //   this.contactosSeleccionados = [];
-  //   this.contactos.forEach(contacto=>{
-  //     contacto.seleccionado = this.isSelectedAll;
-  //     if(this.isSelectedAll){
-        
-  //       this.contactosSeleccionados.push(contacto);
-  //     }
-  //   });
-  // }
-
-  // addContacto(contacto:Contacto, i:number=null){
-  //   let contactoSeleccionado = this.contactos.filter((c)=> c.id === contacto.id)[0];
-  //   if(contactoSeleccionado.seleccionado){
-  //     this.contactosSeleccionados.push(contacto);
-  //   }else{
-  //     this.contactosSeleccionados.splice(i, 1);
-  //   }
-    
-  // }
-  // onItemSelect(item: any) {
-  //   console.log(item);
-  //   let intereses = [];
-  //   this.interesesSeleccionados.forEach(interes => {
-  //     intereses.push(interes.nombre);
-  //   });
-    
-  //   this.contactoService.getRecomendacion(intereses).subscribe(
-  //     (res:any) =>{
-  //       console.log("recomendación",res);
-  //       let contactosRecomendados = res;
-  //       this.contactosSeleccionados = [];
-  //       contactosRecomendados.forEach(contactoR => {
-  //         let contactoRecomendado = this.contactos.filter(contacto=>contacto.nombres === contactoR.nombre)[0];
-  //         contactoRecomendado.seleccionado = true;
-  //         this.contactosSeleccionados.push(contactoRecomendado);
-  //       });
-  //       console.log(this.contactosSeleccionados);
-  //       // this.contactos.forEach(contacto => {
-  //       //   if(contacto.nombres === res.nombre)
-  //       // });
-        
-  //     }
-  //   )
-  // }
-  // onSelectAll(items: any) {
-  //   console.log(items);
-  // }
-    
-    //...
-    next(){
-      this.step += 1;
-    }
-    back(){
-        this.step -= 1;
-    }
+  next(){
+    this.step += 1;
+  }
+  back(){
+      this.step -= 1;
+  }
 
     
   autoGrowTextZone(e, event) {
-    // e.target.style.height = "0px";
-    // e.target.style.height = (e.target.scrollHeight + 25)+"px";
-
-    // e.target.style.overflow = 'hidden';
-    // e.target.style.height = 0;
-    // e.target.style.height = e.target.scrollHeight + 'px';
-    // console.log(event);
     var el = this;
     let height = (event.style.height).substring(0, (event.style.height).length -2);
-    // console.log(height);
+    
     setTimeout(function(){
       if(height < 580){
         e.target.style.cssText = 'height:auto;';
         event.style.cssText = 'height:auto;';
-        // for box-sizing other than "content-box" use:
-        // e.target.style.cssText = '-moz-box-sizing:content-box';
+        
+        
         e.target.style.cssText = 'height:' + e.target.scrollHeight + 'px';
         event.style.cssText = 'height:' + e.target.scrollHeight + 'px';
       }
       
     },0);
-
-    // if( !e.target.classList.contains('autoExpand') || e.target.nodeName != 'TEXTAREA' ) return
-  
-    // var minRows = e.target.getAttribute('data-min-rows')|0, rows;
-    // !e.target._baseScrollHeight && this.getScrollHeight(e.target)
-  
-    // e.target.rows = minRows
-    // rows = Math.ceil((e.target.scrollHeight - e.target._baseScrollHeight) / 16)
-    // e.target.rows = minRows + rows
+    
   }
-
-  // getScrollHeight(elm){
-  //   let savedValue = elm.value
-  //   elm.value = ''
-  //   elm._baseScrollHeight = elm.scrollHeight
-  //   elm.value = savedValue
-  // }
 
   getObjetivos(){
     return new Promise((resolve, reject) => {
       this.objetivoService.getAll('?status=A').subscribe(
         (res:any) => {
-          console.log(res);
+          
           this.objetivos = res;
           resolve(true);
         },
@@ -244,7 +141,7 @@ export class CampaniaAddComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.canalService.getAll('?status=A').subscribe(
         (res:any) => {
-          console.log(res);
+          
           this.canales = res;
           resolve(true);
         },
@@ -259,7 +156,7 @@ export class CampaniaAddComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.contactoService.getAll('?status=A').subscribe(
         (res:any) => {
-          console.log(res);
+          
           this.contactos = res;
           resolve(true);
         },
@@ -272,14 +169,14 @@ export class CampaniaAddComponent implements OnInit {
 
   getImage(event){
     this.selectedFile = event;
-    console.log("padre",this.selectedFile);
+    
   }
 
   getIntereses(qs: String = ""){
     return new Promise((resolve, reject) => {
       this.interesService.getAll('?status=A').subscribe(
         (res:any) => {
-          console.log(res);
+          
          
           this.intereses = res;
           
@@ -291,18 +188,6 @@ export class CampaniaAddComponent implements OnInit {
       );
     });
   }
-  // readUrl(event:any) { 
-  //   if (event.target.files && event.target.files[0]) { 
-  //     var reader = new FileReader(); 
-
-  //     reader.onload = (event:any) => { 
-  //       this.path_logo = event.target.result; 
-        
-  //     } 
-  //     this.campania.nombre_archivo = event.target.files[0].name;
-  //     reader.readAsDataURL(event.target.files[0]); 
-  //   } 
-  // } 
 
   convertirAWhatsAppText(){
     const whatsAppFormat = [
@@ -325,7 +210,7 @@ export class CampaniaAddComponent implements OnInit {
       let tagInicial = `<${tag}>`;
       let tagFinal = `</${tag}>`;
 
-      // var cadena = "Test abc test test abc test test test abc test test abc";
+      
       let regInicio = new RegExp(tagInicial,'g');
       let regFin = new RegExp(tagFinal,'g');
       const matchInicio = this.campania.mensaje.match(regInicio);
@@ -334,9 +219,9 @@ export class CampaniaAddComponent implements OnInit {
       this.campania.mensaje = this.campania.mensaje.replace(regInicio, symbol);
       this.campania.mensaje = this.campania.mensaje.replace(regFin, symbol);
 
-    // console.log(this.campania.mensaje);
+    
     });
-// console.log(this.campania.mensaje);
+
    
   }
 
@@ -381,24 +266,6 @@ export class CampaniaAddComponent implements OnInit {
     return true;
   }
 
-  // verificarURL(){
-
-  //   // let re = `(http|ftp|https)://[\w-]+(\.[\w-]+)*([\w.,@?^=%&amp;:/~+#-]*[\w@?^=%&amp;/~+#-])?`;
-  //   // let regex = new RegExp(re, 'mg');
-  // //   let urlexp = new RegExp( '(http|ftp|https)://[\\w-]+(\\.[\\w-]+)+([\\w-.,@?^=%&:/~+#-]*[\\w@?^=%&;/~+#-])?' );
-  // // //  let urlexp = /([a-z]+\:\/+)([^\/\s]*)([a-z0-9\-@\^=%&;\/~\+]*)[\?]?([^ \#]*)#?([^ \#]*)/ig; 
-  // //   let urlexp1 = new RegExp(/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi); 
-  //   let expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
-  //   let regex = new RegExp(expression);
-  //   const match = this.campania.url.match(regex);
-  //   // const match1 = this.link.match(regex);
-  //   // console.log(match);
-  //     // const matchFinal = this.campania.body.match(regInicio);
-  //     if(!match ) return false;
-  //     if(match) return true;
-
-  //   return;
-  // }
   setValues(){
     this.campania.contactos = this.contactosSeleccionados;
     this.campania.canales = this.canalesSeleccionados;
@@ -407,7 +274,7 @@ export class CampaniaAddComponent implements OnInit {
 
   onSubmitGuardar(){
     this.convertirAWhatsAppText();
-    // this.setValues();
+    
     Swal.fire({
       title: '¿Está seguro de guardar esta campaña?',
       icon: 'success',
@@ -433,19 +300,19 @@ export class CampaniaAddComponent implements OnInit {
        
       }
     });
-    console.log(this.campania);
+    
     
     
   }
   
   onSubmitEjecutar(){
     this.convertirAWhatsAppText();
-    // this.setValues();
-    console.log(this.campania);
+    
+    
     this.spinner.show();
     this.saveCampania().then(
       res => {
-        console.log(this.campania.id);
+        
         this.ejecutarCampania().then(
           res => {
             
@@ -473,17 +340,17 @@ export class CampaniaAddComponent implements OnInit {
 
               this.campaniaService.onUpload(this.selectedFile).subscribe(
                 response=>{
-                  //  if(response.status=='success'){
-                      console.log(response);
+                  
+                      
                     },
                     error=>{
                       this.spinner.hide();
-                      console.log(<any>error);
+                      
                     }
                   );
                   
             }
-            console.log("res",res);
+            
             this.campania = res;
             resolve(true);
             this.spinner.hide();
@@ -495,21 +362,6 @@ export class CampaniaAddComponent implements OnInit {
         );
   
       });
-    // }else {
-    //   return new Promise((resolve, reject)=>{
-    //   this.campaniaService.save(this.campania).subscribe(
-    //     (res:any) => {
-    //       this.campania = res;
-    //       resolve(true);
-    //       this.spinner.hide();
-    //     },
-    //     err => {
-    //       reject();
-    //       this.spinner.hide();
-    //     }
-    //   );
-    //   });
-    // }
     
   }
 
@@ -517,7 +369,7 @@ export class CampaniaAddComponent implements OnInit {
     return new Promise((resolve, reject)=>{
       this.campaniaService.ejecutar(this.campania.id).subscribe(
         res => { 
-          console.log(res);
+          
           resolve(true);
           
         }, 

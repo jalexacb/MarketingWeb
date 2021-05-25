@@ -31,7 +31,7 @@ export class CanalListComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private modalService: BsModalService,
     private canalService: CanalService,
-    // private modalService: NgbModal,
+    
     
     private loginService: LoginService,
     private permisoService: PermisoService,
@@ -69,7 +69,7 @@ export class CanalListComponent implements OnInit {
     let qs = "";
     this.spinner.show(this.spinner1);
     if(this.busqueda != ''){
-      console.log("bus",this.busqueda);
+      
        
       qs += `&busqueda=${this.busqueda}`;
       
@@ -88,10 +88,10 @@ export class CanalListComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.canalService.getAll(`?per_page=${this.per_page}${qs}`).subscribe(
         (res:any) => {
-          console.log(res);
+          
           this.canales = res.data;
           this.collectionSize = res.total;
-          console.log(this.collectionSize);
+          
           resolve(true);
         },
         err => {
@@ -140,7 +140,7 @@ export class CanalListComponent implements OnInit {
     this.permisoService.getPermisoByFilter(qs).subscribe(
       (res:Permiso) => {
         this.permiso = res;
-        console.log("permiso",res);
+        
       }, 
       err => {
 
@@ -150,11 +150,6 @@ export class CanalListComponent implements OnInit {
 
   onChangePage(event){
     this.onSearch(event);
-    //  this.spinner.show(this.spinner1);
-    // this.getCanales(event).then(
-    //   res =>  this.spinner.hide(this.spinner1),
-    //   err =>  this.spinner.hide(this.spinner1),
-    // )
   }
 
   onDelete(canal: Canal) {
@@ -191,29 +186,14 @@ export class CanalListComponent implements OnInit {
   }
 
   onCreate(){
-    // const modalRef = this.modalService.open(UsuarioAddModalComponent, { size: 'lg' });
-    // modalRef.componentInstance.name = 'World';
-
     const initialState = {
     };
     this.bsModalRef = this.modalService.show(CanalAddModalComponent, {initialState, class: 'modal-sm', backdrop: 'static'});
     this.bsModalRef.content.sendRespuesta.subscribe(res =>{
       this.getCanales();
       this.advancePage = 1;
-      console.log("res",res);
-
-    }
-  
-  );
+    });
   }
-
-  // onEdit(canal: Canal){
-  //   const modalRef = this.modalService.open(CanalEditModalComponent, { size: 'sm' });
-  //   modalRef.componentInstance.canal = canal;
-  //   modalRef.result.then(
-  //     res => this.onSearch(),
-  //   );
-  // }
 
   onEdit(canal: Canal){
     const initialState = { 
@@ -223,12 +203,8 @@ export class CanalListComponent implements OnInit {
     this.bsModalRef.content.sendRespuesta.subscribe(res =>{
         this.getCanales();
         this.advancePage = 1;
-        console.log("res",res);
-
       }
     
     );
   }
-
-
 }

@@ -16,7 +16,7 @@ export class ContactoEditModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.contacto);
+    
   }
 
   isValidForm(){
@@ -36,7 +36,7 @@ export class ContactoEditModalComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.contacto);
+    
     this.contactoService.update(this.contacto).subscribe(
       res => {
         Swal.fire(

@@ -31,7 +31,6 @@ export class RolAddModalComponent implements OnInit {
           'success'
         )
         this.sendRespuesta.emit(true);
-        console.log("Se ha guardado");
         this.activeModal.close(true);
       },
       err => {

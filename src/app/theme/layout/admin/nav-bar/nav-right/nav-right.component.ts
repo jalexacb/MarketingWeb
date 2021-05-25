@@ -45,7 +45,6 @@ export class NavRightComponent implements OnInit {
       this.usuarioService.getById(this.usuario.sub).subscribe(
         (res:any) => {
           this.usuario = res;
-          console.log("user",this.usuario);
           resolve(true);
         },
         err => {

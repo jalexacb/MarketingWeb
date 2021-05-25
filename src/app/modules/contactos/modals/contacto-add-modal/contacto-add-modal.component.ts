@@ -40,7 +40,7 @@ export class ContactoAddModalComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.contacto);
+    
     this.contactoService.save(this.contacto).subscribe(
       res => {
         Swal.fire(
