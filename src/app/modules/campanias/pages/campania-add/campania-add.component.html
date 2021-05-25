@@ -1,0 +1,42 @@
+
+  <ngx-spinner [name]="spinner1" [fullScreen]="false" type="ball-clip-rotate-pulse" size="medium"></ngx-spinner>
+  <section class="multi_step_form">  
+    <form id="msform"> 
+      <!-- Tittle -->
+      <div class="tittle">
+        <h2>Creación de campañas</h2>
+        <p>Para poder crear la campaña, tiene que seguir los pasos correctamente.</p>
+      </div>
+      <!-- progressbar -->
+      <ul id="progressbar">
+        <li [ngClass]="{'active': step === 2 || step === 1 || step === 3}" >Compruebe los parámetros necesarios</li>  
+        <li [ngClass]="{'active': step === 2 || step === 3}" >Campaña</li> 
+        <li [ngClass]="{'active': step === 3}" >Información</li>
+      </ul>
+      <app-campania-frm [campania]="campania" (sendImage)="getImage($event)" [step]="step" [contactos]="contactos" [objetivos]="objetivos" [intereses]="intereses" [canales]="canales"></app-campania-frm>
+      
+    <br><br>
+  <div class="row justify-content-center">
+    <div class="align-self-center">
+      <button *ngIf="step==3 || step== 2" type="button" (click)="back()" class="action-button previous previous_button">Volver</button> 
+    <button *ngIf="step==1 || step== 2" type="button" class="next action-button" [disabled]="!isValidForm()"  (click)="next()">Continuar</button>  
+    <button *ngIf="step==3" type="button" class="action-button" [disabled]="!isValidForm()" (click)="onSubmitEjecutar()">Ejecutar</button> <br>
+    
+    </div>
+    
+  </div>
+  <br><br>
+  <div class="row justify-content-between">
+    <div class="col-4">
+      
+      <!-- <button type="button" class="btn btn-outline-danger" ngbTooltip="btn-outline-danger">Cancelar</button> -->
+      <a href="javascript:" type="button" class="btn btn-outline-danger" ngbTooltip="btn-outline-danger" [routerLink]="['/campanias']">Cancelar</a>
+    </div>
+    <div class="col-4">
+      <button *ngIf="step==3" type="button" class="btn btn-outline-success" ngbTooltip="btn-outline-success" [disabled]="!isValidForm()" (click)="onSubmitGuardar()">Guardar</button>
+    </div>
+  </div>
+
+</form>  
+    
+</section> 

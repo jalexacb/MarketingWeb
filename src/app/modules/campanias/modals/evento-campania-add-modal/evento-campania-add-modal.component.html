@@ -1,0 +1,84 @@
+<ngx-spinner [name]="spinner1" [fullScreen]="false" type="ball-clip-rotate-pulse" size="medium"></ngx-spinner>
+<div class="modal-header">
+    <h4 class="modal-title">Crear evento de campaña</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form action="javascript:"  class="was-validated">
+        <div class="form-row">
+            <div class="form-group col-sm-4">
+                <label for="inputState">Campaña</label>
+                <select id="inputState" class="form-control" name="campania" required [(ngModel)]="eventoCampania.campania_id"> 
+                  <option *ngFor="let campania of campanias"  [value]="campania.id">{{campania.nombre}}</option> 
+                </select>
+                <div class="valid-feedback">Válido.</div>
+                <div class="invalid-feedback">Campo obligatorio.</div>
+            </div>
+            <div class="form-group col-sm-4">
+                <label for="inputState">Fecha inicio</label>
+                <div class='input-group date' id='fecha_seguimiento'>
+                    <span class="input-group-prepend">
+                      <span class="input-group-text" >
+                        <span class="fa fa-calendar"></span>
+                      </span>
+                    </span>
+                    <input class="coupon-item-field-value form-control" required [min]="getFechaActual()" (dateTimeChange)="onChangeFechaInicio()" [owlDateTimeTrigger]="dt3" [(ngModel)]="fecha_inicio" name="fecha_inicio" placeholder="dd/mm/aaaa" [owlDateTime]="dt3">
+                    <owl-date-time [pickerType]="'both'" #dt3 ></owl-date-time>
+                </div>
+                <div class="valid-feedback">Válido.</div>
+                <div class="invalid-feedback">Campo obligatorio.</div>
+            </div>
+            
+            <div class="form-group col-sm-4">
+                <label for="inputState">Fecha fin</label>
+                <div class='input-group date' id='fecha_seguimiento'>
+                    <span class="input-group-prepend">
+                      <span class="input-group-text" >
+                        <span class="fa fa-calendar"></span>
+                      </span>
+                    </span>
+                    <input class="coupon-item-field-value form-control" required [min]="fecha_inicio" [owlDateTimeTrigger]="dt4" [(ngModel)]="fecha_fin" name="fecha_fin" placeholder="dd/mm/aaaa" [owlDateTime]="dt4">
+                    <owl-date-time [pickerType]="'both'" #dt4 ></owl-date-time>
+                </div>
+                <div class="valid-feedback">Válido.</div>
+                <div class="invalid-feedback">Campo obligatorio.</div>
+            </div>
+            
+        </div>
+        <!-- <div class="form-row">
+            <div class="form-group col-md-4">
+                <input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date Time">
+                <owl-date-time #dt1></owl-date-time>
+                <label for="inputState">Fecha inicio</label>
+                <input
+                class="form-control"
+                type="text"
+                mwlFlatpickr
+                [(ngModel)]="eventoCampania.fecha_inicio"
+                name="fech"
+                [altInput]="true"
+                [convertModelValue]="true"
+                [enableTime]="true"
+                dateFormat="Y-m-dTH:i"
+                altFormat="F j, Y H:i"
+                placeholder="Not set"
+                />
+    
+                <div class="valid-feedback">Válido.</div>
+                <div class="invalid-feedback">Campo obligatorio.</div>
+            </div>
+           
+            
+        </div> -->
+    </form>
+</div>
+<div class="modal-footer">
+    <div class="row">
+        <!-- [disabled]="!isValidForm()"   -->
+        <button type=" button" class="btn btn-primary" [disabled]="!isValidForm()" (click)="onSubmit()">Crear</button>
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Cancelar</button>
+    </div>
+</div>
+

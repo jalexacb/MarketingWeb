@@ -1,0 +1,152 @@
+<ngx-spinner type = "ball-clip-rotate-pulse"></ngx-spinner>
+<h5>Permisos</h5>
+<div class="row"> 
+  <div class="col-md-4">
+    <div id="main-search" class="main-search open">
+      <div class="input-group">
+        <select class="form-control" id="exampleFormControlSelect1" (change)="onChangeTipo()" [(ngModel)]="tipo">
+          <option value="">Elegir</option>
+          <option value="U">Usuario</option>
+          <option value="R">Rol</option>
+        </select>
+      </div>
+      
+    </div>
+  </div>
+  <div class="col-md-6 ml-auto">
+    <div id="main-search" class="main-search open">
+      <div class="input-group">
+        <select *ngIf="tipo == 'U'" class="form-control" id="exampleFormControlSelect1" (change)="onChangeUsuarioRol()" [(ngModel)]="usuario.id">
+          <option value="">Elegir usuario</option>
+          <option *ngFor="let usuario of usuarios; let i = index;" [value]="usuario.id">{{usuario.usuario}}</option>
+          
+        </select>
+        <select *ngIf="tipo == 'R'" class="form-control" id="exampleFormControlSelect1" (change)="onChangeUsuarioRol()" [(ngModel)]="rol.id">
+          <option value="">Elegir rol</option>
+          <option *ngFor="let rol of roles; let i = index;" [value]="rol.id">{{rol.nombre}}</option>
+          
+        </select>
+      </div>
+      
+    </div>
+    <!-- <div id="main-search" class="main-search open">
+      
+      <div class="input-group">
+        <span class="input-group-prepend" >
+          <i class="feather icon-search input-group-text"></i>
+        </span>
+
+        <div id="m-search" class="form-control" (click)="openModalUsuarios(modalUsuario)">
+          Búsqueda
+        </div>
+        
+        
+      </div>
+    </div> -->
+  </div>
+  <div class="col-md-2 ml-auto">
+    <button type="button" class="btn btn-primary" *ngIf="permiso.crear" (click)="onEditar()" ngbTooltip="btn-primary">{{isEditable?'Cancelar':'Editar permisos'}}</button>
+  </div>
+  <!-- <div class="col-md-2 ml-auto">
+    <button type="button" class="btn btn-primary" (click)="onCreate()" ngbTooltip="btn-primary">Crear Usuario</button>
+  </div> -->
+</div>
+      
+<br>
+
+<div class="row" *ngIf="usuario.id || rol.id">
+    <div class="col-sm-12">
+      <app-card [options]="false" [hidHeader]="true">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Menú</th>
+            <th>Ver</th>
+            <th>Crear</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+            <th>Todos</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let menu of menus; let i = index;"
+              [ngClass]="{'danger-table': usuario.status === 'I'}"
+          >
+            <th scope="row">{{ i+1 }}</th>
+            <td>
+              {{menu.title}}
+            </td>
+            <td>
+              <div class="form-check" *ngIf="menu.type == 'item'">
+                <input class="form-check-input" type="checkbox"  [disabled]="!isEditable" [(ngModel)]="menu.ver" (change)="onChange(menu,'ver')">
+              </div>
+            </td>
+            <td>
+              <div class="form-check" *ngIf="menu.type == 'item'">
+                <input class="form-check-input" type="checkbox" [disabled]="!isEditable" [(ngModel)]="menu.crear" (change)="onChange(menu)">
+              </div>
+            </td>
+            <td>
+              <div class="form-check" *ngIf="menu.type == 'item'">
+                <input class="form-check-input" type="checkbox" [disabled]="!isEditable" [(ngModel)]="menu.editar" (change)="onChange(menu)">
+              </div>
+            </td>
+            <td>
+              <div class="form-check" *ngIf="menu.type == 'item'">
+                <input class="form-check-input" type="checkbox" [disabled]="!isEditable" [(ngModel)]="menu.eliminar" (change)="onChange(menu)">
+              </div>
+            </td>
+            <td>
+              <div class="form-check" *ngIf="menu.type == 'item'">
+                <input class="form-check-input" type="checkbox" [disabled]="!isEditable" [(ngModel)]="menu.todos" (change)="onChange(menu,'todos')">
+              </div>
+            </td>
+            <td>
+              <div class="custom-control custom-switch" *ngIf="menu.type == 'group' || menu.type == 'collapse'">
+                <input type="checkbox" class="custom-control-input" disabled  [(ngModel)]="menu.activado" [id]="'customSwitch'+i">
+                <label class="custom-control-label" [for]="'customSwitch'+i"></label>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </app-card>
+    </div>
+    <!-- <div class="col-sm-6">
+      <app-card [options]="false">
+       hola
+      </app-card>
+    </div> -->
+
+</div>
+
+<div class="row">
+  <div class="col-sm-12" *ngIf="(usuario.id || rol.id) && (isEditable)">
+    <button type=" button" class="btn btn-primary" (click)="onSubmit()">Guardar</button>
+  </div>
+  
+  <!-- <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button> -->
+</div>
+
+<ng-template #modalUsuario let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Usuarios</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Aceptar</button>
+  </div>
+</ng-template>
+
+
+
+
+
+  

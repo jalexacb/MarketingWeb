@@ -1,0 +1,31 @@
+
+  <ngx-spinner [name]="spinner1" [fullScreen]="false" type="ball-clip-rotate-pulse" size="medium"></ngx-spinner>
+  <section class="multi_step_form">  
+    <form id="msform"> 
+      <!-- Tittle -->
+      <div class="tittle">
+        <h2>Edición de campañas</h2>
+        <p>Para poder editar la campaña, tiene que seguir los pasos correctamente.</p>
+      </div>
+      <!-- progressbar -->
+      <ul id="progressbar">
+        <li [ngClass]="{'active': step === 2 || step === 1 || step === 3}" >Compruebe los parámetros necesarios</li>  
+        <li [ngClass]="{'active': step === 2 || step === 3}" >Campaña</li> 
+        <li [ngClass]="{'active': step === 3}" >Información</li>
+      </ul>
+      <app-campania-frm [campania]="campania" [step]="step" [contactos]="contactos" [intereses]="intereses" [canales]="canales"></app-campania-frm>
+      
+      <br><br>
+  <div class="row justify-content-center">
+    <div class="align-self-center">
+      <button *ngIf="step==3 || step== 2" type="button" (click)="back()" class="action-button previous previous_button">Volver</button> 
+    <button *ngIf="step==1 || step== 2" type="button" class="next action-button" [disabled]="!isValidForm()"  (click)="next()">Continuar</button>  
+    <button *ngIf="step==3" type="button" class="action-button">Ejecutar</button> <br>
+    <a *ngIf="step==3" href="javascript:" type="button" (click)="onSubmit()">Guardar</a>
+    </div>
+    
+  </div>
+  <br><br>
+</form>  
+    
+</section> 

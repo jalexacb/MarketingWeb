@@ -1,0 +1,258 @@
+<ngx-spinner type = "ball-clip-rotate-pulse"></ngx-spinner>
+<div class="row">
+  <div class="col-sm-3">
+    <h5>Campañas</h5>
+  </div>
+  <div class="col-sm-3">
+    <h5>Fecha de inicio</h5>
+  </div>
+  <div class="col-sm-3">
+    <h5>Fecha de fin</h5>
+  </div>
+ 
+</div>
+
+
+<div class="row"> 
+  <div class="col-sm-3">
+    <div id="main-search" class="main-search open">
+      
+      <div class="input-group">
+        <span class="input-group-prepend" >
+          <i class="feather icon-search input-group-text"></i>
+        </span>
+        <input type="text" id="m-search" class="form-control" name="busqueda" [(ngModel)]="busqueda" (keyup.backspace)="onKeyBackSpace()" (keyup)="onSearch()" placeholder=" Búsqueda . . ." [style.width]="'50px'">
+        
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <!-- <label for="inputState">Fecha fin</label> -->
+    <div class='input-group date' id='fecha_seguimiento'>
+        <span class="input-group-prepend">
+          <span class="input-group-text" >
+            <span class="fa fa-calendar"></span>
+          </span>
+        </span>
+        <input class="coupon-item-field-value m-search form-control" (dateTimeChange)="onSearch()" required [(ngModel)]="fecha_inicio_seguimiento" [owlDateTimeTrigger]="dt4" name="fecha_inicio" placeholder="dd/mm/aaaa" [owlDateTime]="dt4">
+        <owl-date-time [pickerType]="'calendar'" #dt4 ></owl-date-time>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <!-- <label for="inputState">Fecha fin</label> -->
+    <div class='input-group date' id='fecha_seguimiento'>
+        <span class="input-group-prepend">
+          <span class="input-group-text" >
+            <span class="fa fa-calendar"></span>
+          </span>
+        </span>
+        <input class="coupon-item-field-value m-search form-control" (dateTimeChange)="onSearch()" required [(ngModel)]="fecha_fin_seguimiento"  [owlDateTimeTrigger]="dt5" name="fecha_fin" placeholder="dd/mm/aaaa" [owlDateTime]="dt5">
+        <owl-date-time [pickerType]="'calendar'" #dt5 ></owl-date-time>
+    </div>
+  </div>
+  
+</div>
+<br>
+<div class="row">
+  <div class="col-sm-3">
+    <h5>Tipo</h5>
+  </div>
+  <div class="col-sm-3">
+    <h5>Canales</h5>
+  </div>
+  <div class="col-sm-3">
+    <h5>Intereses</h5>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-3">
+    <!-- <label for="inputPassword4">Canales</label> -->
+    <select class="custom-select" id="inputGroupSelect01" (change)="onSearch()" [(ngModel)]="tipo">
+      
+      <option value="E" selected>Ejecutadas</option>
+      <option value="A">Archivadas</option>
+      <!-- <option value="3">Three</option> -->
+    </select>
+    <!-- <option selected>Tipo</option> -->
+  </div>
+  <div class="col-sm-3 dropdowns">
+    <!-- <label for="inputPassword4">Canales</label> -->
+    <ng-multiselect-dropdown
+      [placeholder]="'Canales'"
+      [data]="canales"
+      [(ngModel)]="canalesSeleccionados"
+      name="canales"
+      [settings]="settingsSelect"
+      (onSelect)="onCanalSelect($event)"
+      (onDeSelect)="onCanalDeSelect($event)"
+      (onDeSelectAll)="onDeSelectAllCanales($event)"
+      (onSelectAll)="onSelectAllCanales($event)"
+      required
+    >
+    </ng-multiselect-dropdown>
+
+  </div>
+    <!-- [data]="canales"
+        [(ngModel)]="campania.canales"
+        name="canales"
+        [settings]="settingsSelect"
+        (onSelect)="onItemSelect($event)"
+        (onSelectAll)="onSelectAll($event)"
+        required -->
+  <div class="col-sm-3 dropdowns">
+    <!-- <label for="inputPassword4">Interé</label> -->
+    <ng-multiselect-dropdown
+      [placeholder]="'Intereses'"
+      [data]="intereses"
+      [(ngModel)]="interesesSeleccionados"
+      name="interesesSeleccionados"
+      [settings]="settingsSelect"
+      (onSelect)="onInteresSelect($event)"
+      (onDeSelect)="onInteresDeSelect($event)"
+      (onDeSelectAll)="onDeSelectAllInteres($event)"
+      (onSelectAll)="onSelectAllInteres($event)"
+      required
+      >
+    </ng-multiselect-dropdown>
+  </div>
+</div>
+      
+<br>
+
+<div class="row">
+  <div class="col-sm-12">
+    <app-card [options]="false" [hidHeader]="true">
+        <table class="table table-hover m-b-0">
+          <thead>
+            <tr>
+              <th><span>Campaña</span></th>
+              <th><span>Fecha</span></th>
+              <th>
+                
+                <span>Tasa de interesados
+                  
+                  <a class="help"
+                  [placement]="'bottom'" ngbPopover="Tasa de interesados (%) = número de mensajes con respuesta positiva / número de mensajes respondidos * 100" data-original-title="Tasa de interesados (%) = número de mensajes con respuesta positiva / número de mensajes respondidos * 100"><i class="feather icon-help-circle f-16"
+                   
+                    ></i></a>
+                </span>
+              </th>
+              <th>
+                <span>Tasa de rebote
+                  <a class="help" [placement]="'bottom'" ngbPopover="Tasa de rebote (%) = número de mensajes rebotados / número de mensajes enviados * 100" data-original-title="Tasa de interesados (%) = número de mensajes rebotados / número de mensajes enviados * 100"><i class="feather icon-help-circle f-16"></i></a>
+                </span>
+              </th>
+              <th>
+                <span>Tasa de entrega
+                  <a class="help" [placement]="'bottom'" ngbPopover="Tasa de entrega (%) = número de mensajes con entregados con éxito / número de mensajes enviados * 100" data-original-title="Tasa de interesados (%) = número de mensajes entregados con éxito / número de mensajes enviados * 100"><i class="feather icon-help-circle f-16"></i></a>
+                </span>
+              </th>
+              <th>
+                <span>Tasa de lectura (*solo WhatsApp)
+                  <a class="help" [placement]="'bottom'" ngbPopover="Tasa de lectura o apertura (%)= número de aperturas del mensaje / número de mensajes entregados * 100" data-original-title="Tasa de lectura o apertura (%)= número de aperturas del mensaje / número de mensajes entregados * 100   pag 59"><i class="feather icon-help-circle f-16"></i></a>
+                </span>
+              </th>
+              <th>
+                <span>Tasa de respuesta (*solo WhatsApp)
+                  <a class="help" [placement]="'bottom'" ngbPopover="Tasa de respuesta (%)= número de mensajes respondidos / número de mensajes entregados * 100 " data-original-title="Tasa de respuesta (%)= número de mensajes respondidos / número de mensajes entregados * 100"><i class="feather icon-help-circle f-16"></i></a>
+                </span>
+              </th>
+             
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let seguimiento of seguimientos">
+              <td>{{seguimiento.nombre}}</td>
+              <td>{{seguimiento.fecha_inicio_seguimiento | date}}</td>
+              <td>
+                {{getPorcentaje(seguimiento.usuarios_interesados, seguimiento.mensajes_respondidos)}}%
+                <div class="mt-1">
+                  <ngb-progressbar type="primary" height="4px" [value]="getPorcentaje(seguimiento.usuarios_interesados, seguimiento.mensajes_respondidos)"></ngb-progressbar>
+                </div>
+              </td>
+              <td>
+                {{getPorcentaje(seguimiento.mensajes_rebotados, seguimiento.mensajes_enviados)}}%
+                <div class="mt-1">
+                  <ngb-progressbar type="info" height="4px" [value]="getPorcentaje(seguimiento.mensajes_rebotados, seguimiento.mensajes_enviados)"></ngb-progressbar>
+                </div>
+              </td>
+              <td>
+                {{getPorcentaje(seguimiento.mensajes_entregados, seguimiento.mensajes_enviados)}}%
+                <div class="mt-1">
+                  <ngb-progressbar type="primary" height="4px" [value]="getPorcentaje(seguimiento.mensajes_entregados, seguimiento.mensajes_enviados)"></ngb-progressbar>
+                </div>
+              </td>
+              <td>
+                <div class="mt-1">
+                  {{getPorcentaje(seguimiento.mensajes_leidos, seguimiento.mensajes_entregados_ws)}}%
+                  <ngb-progressbar type="warning" height="4px" [value]="getPorcentaje(seguimiento.mensajes_leidos, seguimiento.mensajes_entregados_ws)"></ngb-progressbar>
+                </div>
+              </td>
+              <td>
+                {{getPorcentaje(seguimiento.mensajes_respondidos, seguimiento.mensajes_entregados_ws)}}%
+                <div class="mt-1">
+                  <ngb-progressbar type="success" height="4px" [value]="getPorcentaje(seguimiento.mensajes_respondidos, seguimiento.mensajes_entregados_ws)"></ngb-progressbar>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    </app-card>
+  </div>
+  
+</div>
+    <!-- <div class="col-sm-12">
+      <app-card [options]="false" [hidHeader]="true">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th>Campaña</th>
+            <th>Interesados</th>
+            
+            <th>Msj. respondidos</th>
+            <th>Msj. leídos</th>
+            <th>Msj. rebotados</th>
+            <th>Msj. Entregados</th>
+            <th>Msj. Enviados</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let campania of campanias; let i = index;"
+              
+          >
+            <th>{{ i+1 }}</th>
+            <td>
+              {{campania.campania}}
+            </td>
+            <td>{{campania.usuarios_interesados}}</td>
+            <td>{{campania.mensajes_respondidos}}</td>
+            <td>{{campania.mensajes_leidos}}</td>
+            <td>{{campania.mensajes_rebotados}}</td>
+            <td>{{campania.mensajes_entregados}}</td>
+            <td>{{campania.mensajes_enviados}}</td>
+            
+             <td>   noooooo
+              <div class="btn-group mb-2 mr-2" ngbDropdown [placement]="'bottom-right'">
+                  <button class="btn btn-icon" ngbDropdownToggle type="button"><i class="icon feather icon-more-vertical"></i></button>
+                  <div ngbDropdownMenu>
+                    <a class="dropdown-item" type="button" (click)="onEdit(contacto)" href="javascript:"><i class="icon feather icon-edit"></i> Editar</a>
+                    <a *ngIf="contacto.status === 'A'" class="dropdown-item" type="button" (click)="onDelete(contacto)" href="javascript:"><i class="icon feather icon-trash"></i> Eliminar</a>
+                    <a *ngIf="contacto.status === 'I'" class="dropdown-item" type="button" (click)="onActivar(contacto)" href="javascript:"><i class="icon feather icon-check-square"></i> Activar</a>
+                  </div>
+              </div>
+            </td> nooooooo
+          </tr>
+          </tbody>
+        </table>
+      </app-card>
+    </div> -->
+  <!-- </div>
+</div> -->
+
+<div style="float: right;">
+  
+  <ngb-pagination [collectionSize]="collectionSize"  (pageChange)="onChangePage($event)" [(page)]="advancePage" [maxSize]="3" [pageSize]="per_page" [boundaryLinks]="true"></ngb-pagination>
+  
+</div>

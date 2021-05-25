@@ -1,0 +1,18 @@
+<!-- <div><canvas id="idChartCanales" height="120">{{myChart}}</canvas></div> -->
+
+<!-- <div><canvas #myCanvas width="100" height="100"></canvas></div> -->
+
+<div class="chart-wrapper" width="50">
+    <canvas baseChart 
+    [data]="data"
+    [labels]="labels"
+    [colors]="chartColors"
+    [legend]="false"
+    [chartType]="doughnutChartType">
+  </canvas>
+</div>
+
+<!-- [plugins]="barChartPlugins"
+[legend]="barChartLegend"
+[colors]="barChartColors" -->
+<!-- [chartType]="barChartType" -->

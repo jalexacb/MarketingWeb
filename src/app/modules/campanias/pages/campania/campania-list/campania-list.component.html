@@ -1,0 +1,180 @@
+<!-- <ngx-spinner [name]="spinner1" [fullScreen]="true" type="ball-clip-rotate-pulse" size="medium"></ngx-spinner> -->
+<h5>Campañas</h5>
+<div class="row"> 
+    <div class="col-md-4 mb-5">
+      <div id="main-search" class="main-search open">
+        
+        <div class="input-group">
+          <span class="input-group-prepend" >
+            <i class="feather icon-search input-group-text"></i>
+          </span>
+          <input type="text" id="m-search" class="form-control" name="busqueda" [(ngModel)]="busqueda" (keyup.backspace)="onKeyBackSpace()" (keyup)="onSearch()" placeholder=" Búsqueda . . ." [style.width]="'50px'">
+          
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-md-2 ml-auto">
+        <!-- (click)="onCreate()" -->
+      <a type="button" class="btn btn-primary" [routerLink]="['crear']"  ngbTooltip="btn-primary">Crear campaña</a>
+    </div>
+  </div>
+
+<ngb-tabset>
+    <ngb-tab title="PENDIENTES">
+      <ng-template ngbTabContent>
+        <div class="card" *ngFor="let campania of getCampaniasTipo('P'); let i = index;">
+            <div class="card-horizontal">
+                <div class="img-square-wrapper">
+                    <!-- <img class="" src="http://via.placeholder.com/300x180" alt="Card image cap"> -->
+                    <img class="" width="300px" height="200px" [src]="campania.url_media !=''?'http://localhost:8000/api/campania/get-image?imagen='+campania.url_media:'assets/images/campanias/no-imagen.jpg'" alt="Campaña">
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">{{campania.nombre}}<small class="text-muted"> - {{getNombreCanales(campania.campania_canales)}}</small></h4>
+                    <div class="row card-text">
+                        <div class="col-sm-12">
+                            <p [innerHTML]="getHtmlFormat(campania.mensaje)">{{getHtmlFormat(campania.mensaje)}}</p>
+                            <p><strong> Objetivos:</strong> {{getNombreObjetivos(campania.campania_objetivos)}}</p>
+                        </div>
+
+                        <!-- <div class="col-sm-6">
+                           <ul>
+                               <li *ngFor="let objetivo of getNombreObjetivos(campania.campania_objetivos)">{{objetivo?.nombre}}</li>
+                           </ul>
+                        </div> -->
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="card-footer text-right">
+                <!-- <small class="text-muted pr-2">Última actualización hace 3 mins</small> -->
+                <!-- <div class="text-right"> -->
+                    <!-- <a type="button" class="btn btn-primary" [routerLink]="['editar']"  ngbTooltip="btn-primary">Editar</a> -->
+                    <button type="button"  class="btn btn-primary btn-sm mr-1" (click)="onEdit(campania.id)">Editar</button>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="ejecutarCampania(campania.id)">Ejecutar ahora</button>
+                    <!-- <a href="#" class="btn btn-primary btn-sm">EDITAR</a>
+                    <a href="#" class="btn btn-primary btn-sm">EJECUTAR AHORA</a> -->
+                <!-- </div> -->
+               
+            </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="EJECUTADAS" >
+      <ng-template ngbTabContent>
+        <div class="card" *ngFor="let campania of getCampaniasTipo('E'); let i = index;">
+            <div class="card-horizontal">
+                <div class="img-square-wrapper">
+                    <img class="" width="300px" height="200px" [src]="campania.url_media !=''?'http://localhost:8000/api/campania/get-image?imagen='+campania.url_media:'assets/images/campanias/no-imagen.jpg'" alt="Campaña">
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">{{campania.nombre}}<small class="text-muted"> - {{getNombreCanales(campania.campania_canales)}}</small></h4>
+                    <div class="row card-text">
+                        <div class="col-sm-12">
+                            <p [innerHTML]="getHtmlFormat(campania.mensaje)">{{getHtmlFormat(campania.mensaje)}}</p>
+                            <p><strong> Objetivos:</strong> {{getNombreObjetivos(campania.campania_objetivos)}}</p>
+                        </div>
+
+                        <!-- <div class="col-sm-6">
+                           <ul>
+                               <li *ngFor="let objetivo of getNombreObjetivos(campania.campania_objetivos)">{{objetivo?.nombre}}</li>
+                           </ul>
+                        </div> -->
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="card-footer text-right">
+                <!-- <small class="text-muted">Ejecutada hace 3 mins</small> -->
+                <!-- <button type="button"  class="btn btn-primary btn-sm mr-1" (click)="onEdit(campania)">Editar</button> -->
+                    <button type="button" class="btn btn-primary btn-sm" (click)="archivarCampania(campania.id)">Archivar</button>
+                <!-- <div class="text-right"> -->
+                    <!-- <a href="#" class="btn btn-primary btn-sm">EDITAR</a> -->
+                <!-- </div> -->
+               
+            </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab title="ARCHIVADAS">
+      <ng-template ngbTabContent>
+        <div class="card" *ngFor='let campania of getCampaniasTipo("A"); let i = index;'>
+            <div class="card-horizontal">
+                <div class="img-square-wrapper">
+                    <img class="" width="300px" height="200px" [src]="campania.url_media !=''?'http://localhost:8000/api/campania/get-image?imagen='+campania.url_media:'assets/images/campanias/no-imagen.jpg'" alt="Campaña">
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">{{campania.nombre}}<small class="text-muted"> - {{getNombreCanales(campania.campania_canales)}}</small></h4>
+                    <div class="row card-text">
+                        <div class="col-sm-12">
+                            <p [innerHTML]="getHtmlFormat(campania.mensaje)">{{getHtmlFormat(campania.mensaje)}}</p>
+                            <p><strong> Objetivos:</strong> {{getNombreObjetivos(campania.campania_objetivos)}}</p>
+                        </div>
+
+                        <!-- <div class="col-sm-6">
+                           <ul>
+                               <li *ngFor="let objetivo of getNombreObjetivos(campania.campania_objetivos)">{{objetivo?.nombre}}</li>
+                           </ul>
+                        </div> -->
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="card-footer text-right">
+                <label class="text-success mr-2" *ngIf="campania.recomendado">Campaña recomendada.</label>
+                <!-- <small class="text-muted">Ejecutada hace 3 mins</small> -->
+                <!-- <button type="button"  class="btn btn-primary btn-sm mr-1" (click)="onEdit(campania)">Editar</button> -->
+                    <button type="button" class="btn btn-primary btn-sm" (click)="activarCampania(campania.id)">Activar</button>
+                <!-- <div class="text-right"> -->
+                    <!-- <a href="#" class="btn btn-primary btn-sm">EDITAR</a> -->
+                <!-- </div> -->
+               
+            </div>
+        </div>
+      </ng-template>
+    </ngb-tab>
+  </ngb-tabset>
+
+
+
+
+
+
+
+
+<!-- 
+<div class="container">
+    <div class="card flex-row flex-wrap">
+        <div class="card-header border-0">
+            <img src="//placehold.it/200" alt="">
+        </div>
+        <div class="card-block px-2">
+            <h4 class="card-title">Title</h4>
+            <p class="card-text">Description</p>
+            <a href="#" class="btn btn-primary">BUTTON</a>
+        </div>
+        <div class="w-100"></div>
+        <div class="card-footer w-100 text-muted">
+            Footer stating cats are CUTE little animals
+        </div>
+    </div>
+    <br>
+    <div class="card">
+        <div class="row no-gutters">
+            <div class="col-auto">
+                <img src="//placehold.it/200" class="img-fluid" alt="">
+            </div>
+            <div class="col">
+                <div class="card-block px-2 py-4">
+                    <h4 class="card-title">Title</h4>
+                    <p class="card-text">Description</p>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="card-footer w-100 text-muted text-right">
+            Footer stating cats are CUTE little animals
+            <a href="#" class="btn btn-primary">BUTTON</a>
+        </div>
+    </div>
+</div> -->

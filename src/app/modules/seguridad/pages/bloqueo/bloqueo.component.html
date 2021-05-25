@@ -1,0 +1,36 @@
+<!-- <ngx-spinner type = "ball-clip-rotate-pulse"></ngx-spinner> -->
+<h5>Parámetros de bloqueo</h5>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <app-card [options]="false">
+            <form action="javascript:">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Tiempo máximo de espera (min)</label>
+                        <input type="text" class="form-control" name="usuario" [(ngModel)]="max_intentos" (keypress)="validaNumericos($event)" id="inputEmail4" placeholder="Tiempo">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Intentos máximos de inicio de sesión</label>
+                        <input type="text" class="form-control" name="password" [(ngModel)]="max_tiempo" (keypress)="validaNumericos($event)" id="inputPassword4" placeholder="Intentos">
+                    </div>
+                </div>
+            </form>
+        </app-card>
+        </div>
+    <!-- <div class="col-sm-6">
+      <app-card [options]="false">
+       hola
+      </app-card>
+    </div> -->
+
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <button type=" button" class="btn btn-primary" [disabled]="!isValid()" (click)="onSubmit()">Guardar</button>
+  </div>
+  
+  <!-- <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button> -->
+</div>

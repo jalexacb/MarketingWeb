@@ -1,0 +1,16 @@
+<ngx-spinner [name]="spinner1" [fullScreen]="false" type="ball-clip-rotate-pulse" size="medium"></ngx-spinner>
+<div class="modal-header">
+    <h4 class="modal-title">Editar canal</h4>
+    <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <app-objeto-frm [objeto]="canal"></app-objeto-frm>
+</div>
+<div class="modal-footer">
+    <div class="row">
+        <button type=" button" class="btn btn-primary" [disabled]="!isValidForm()" (click)="onSubmit()">Editar</button>
+        <button type="button" class="btn btn-outline-dark" (click)="bsModalRef.hide()">Cancelar</button>
+    </div>
+</div>

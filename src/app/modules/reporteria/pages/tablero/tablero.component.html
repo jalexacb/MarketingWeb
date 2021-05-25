@@ -1,0 +1,340 @@
+<ngx-spinner type = "ball-clip-rotate-pulse"></ngx-spinner>
+<div class="row">
+  <!-- conversion-section start -->
+  <div class="col-sm-12">
+    <div class="row no-gutters">
+      <div class="col-md-4 col-xl-2 col-sm-5">
+        <app-card [hidHeader]="true">
+          <span class="m-0"><i class="fas fa-circle text-success f-10 m-r-5"></i>Campañas ejecutadas</span>
+          <!-- <span></span> -->
+          <h3>{{totales.campanias_ejecutadas}}</h3>
+          <!-- <app-apex-chart chartID="analytics-apex-user-chart" [chartConfig]="this.chartDB.userAACC"></app-apex-chart> -->
+        </app-card>
+      </div>
+      <div class="col-md-4 col-xl-2 col-sm-5">
+        <app-card [hidHeader]="true">
+          <span class="m-0"><i class="fas fa-circle text-warning f-10 m-r-5"></i>Campañas programadas</span>
+          <!-- <span></span> -->
+          <h3>{{totales.campanias_programadas}}</h3>
+          <!-- <app-apex-chart chartID="analytics-apex-user-chart" [chartConfig]="this.chartDB.userAACC"></app-apex-chart> -->
+        </app-card>
+      </div>
+      <div class="col-md-4 col-xl-2 col-sm-5">
+        <app-card [hidHeader]="true">
+          <span class="m-0"><i class="fas fa-circle text-info f-10 m-r-5"></i>Contactos creados</span>
+          <h3>{{totales.contactos}}</h3>
+          <!-- <app-apex-chart chartID="analytics-apex-session-chart" [chartConfig]="this.chartDB.sessionAACC"></app-apex-chart> -->
+        </app-card>
+      </div>
+      <div class="col-md-4 col-xl-2 col-sm-5">
+        <app-card [hidHeader]="true">
+          <span class="m-0"><i class="fas fa-circle text-primary f-10 m-r-5"></i>Mensajes Respondidos</span>
+          <h3>{{totales.mensajes_respondidos}}</h3>
+          <!-- <app-apex-chart chartID="analytics-apex-page-view-chart" [chartConfig]="this.chartDB.pageViewAACC"></app-apex-chart> -->
+        </app-card>
+      </div>
+      <div class="col-md-4 col-xl-2 col-sm-5">
+        <app-card [hidHeader]="true">
+          <span class="m-0"><i class="fas fa-circle text-danger f-10 m-r-5"></i>Mensajes Rebotados</span>
+          <h3>{{totales.mensajes_rebotados}}</h3>
+          <!-- <app-apex-chart chartID="analytics-apex-page-session-chart" [chartConfig]="this.chartDB.pageSessionAACC"></app-apex-chart> -->
+        </app-card>
+      </div>
+      <div class="col-md-4 col-xl-2 col-sm-5">
+        <app-card [hidHeader]="true">
+          <span class="m-0"><i class="fas fa-circle text-secondary f-10 m-r-5"></i>Mensajes Enviados</span>
+          
+          <h3>{{totales.mensajes_enviados}}</h3>
+          <!-- <app-apex-chart chartID="analytics-apex-avg-session-chart" [chartConfig]="this.chartDB.avgSessionAACC"></app-apex-chart> -->
+        </app-card>
+      </div>
+      
+      <!-- <div class="col-md-4 col-xl-2 col-sm-6">
+        <app-card [hidHeader]="true">
+          <span>Bounce Rate</span>
+          <h3>1.55%</h3>
+          
+        </app-card>
+      </div> -->
+    </div>
+  </div>
+
+  <div class="col-xl-8">
+   
+    <app-card [cardTitle]="'Última campaña: ' + ultimaCampania.nombre?ultimaCampania.nombre:''" [options]="false">
+      <div class="row">
+        <div class="col-sm-4">
+          <app-card  [hidHeader]="true">
+            <div class="row justify-content-center h-100 mt-4">
+              <div class="col-sm-8 align-self-center text-center">
+                <h3>{{ultimaCampania.usuarios_interesados}} <small class="text-muted"> {{getPorcentaje(ultimaCampania.usuarios_interesados, ultimaCampania.mensajes_respondidos)}}%</small></h3>
+                <span>Tasa de interesados</span>
+              </div>
+            </div>
+            <div class="row justify-content-between">
+              <div class="col-4">
+                <label for="">0%</label>
+              </div>
+              <div class="col-4 text-right">
+                <label for="" >100%</label>
+              </div>
+            </div> 
+            <div class="mt-1">
+              <ngb-progressbar type="warning" height="4px" [striped]="true" [animated]="true" [value]="getPorcentaje(ultimaCampania.usuarios_interesados, ultimaCampania.mensajes_respondidos)"></ngb-progressbar> 
+            </div>
+            
+            <!-- <app-apex-chart chartID="analytics-apex-user-chart" [chartConfig]="this.chartDB.userAACC"></app-apex-chart> -->
+          </app-card>
+        </div>
+        <div class="col-sm-4">
+          <app-card  [hidHeader]="true">
+            <div class="row justify-content-center h-100 mt-4">
+              <div class="col-sm-8 align-self-center text-center">
+                <h3>{{ultimaCampania.mensajes_respondidos}} <small class="text-muted"> {{getPorcentaje(ultimaCampania.mensajes_respondidos, ultimaCampania.mensajes_entregados_ws)}}%</small></h3>
+                <span>Tasa de respuesta</span>
+              </div>
+            </div>
+            <div class="row justify-content-between">
+              <div class="col-4">
+                <label for="">0%</label>
+              </div>
+              <div class="col-4 text-right">
+                <label for="" >100%</label>
+              </div>
+            </div> 
+            <div class="mt-1">
+              <ngb-progressbar type="warning" height="4px" [striped]="true" [animated]="true" [value]="getPorcentaje(ultimaCampania.mensajes_respondidos, ultimaCampania.mensajes_entregados_ws)"></ngb-progressbar> 
+            </div>
+            
+            <!-- <app-apex-chart chartID="analytics-apex-user-chart" [chartConfig]="this.chartDB.userAACC"></app-apex-chart> -->
+          </app-card>
+        </div>
+        <div class="col-sm-4">
+          <app-card  [hidHeader]="true">
+            <div class="row justify-content-center h-100 mt-4">
+              <div class="col-sm-8 align-self-center text-center">
+                <h3>{{ultimaCampania.mensajes_entregados}} <small class="text-muted"> {{getPorcentaje(ultimaCampania.mensajes_entregados, ultimaCampania.mensajes_enviados)}}%</small></h3>
+                <span>Tasa de entregados</span>
+              </div>
+            </div>
+            <div class="row justify-content-between">
+              <div class="col-4">
+                <label for="">0%</label>
+              </div>
+              <div class="col-4 text-right">
+                <label for="" >100%</label>
+              </div>
+            </div> 
+            <div class="mt-1">
+              <ngb-progressbar type="warning" height="4px" [striped]="true" [animated]="true" [value]="getPorcentaje(ultimaCampania.mensajes_entregados, ultimaCampania.mensajes_enviados)"></ngb-progressbar> 
+            </div>
+            
+            <!-- <app-apex-chart chartID="analytics-apex-user-chart" [chartConfig]="this.chartDB.userAACC"></app-apex-chart> -->
+          </app-card>
+        </div>
+        
+      </div>
+      <div class="row justify-content-center h-100 mt-4">
+        <div class="col" *ngFor="let canal of canalesUltimaCampania">
+          <app-card  [hidHeader]="true" >
+            <h4>{{canal.nombre}}</h4>
+            <div class="row">
+              <div class="col-sm-6">
+                <span>Tasa de interesados</span>
+              </div>
+              <div class="col-sm-6 text-right">
+                <h5 class="text-muted">{{getPorcentaje(canal.usuarios_interesados, ultimaCampania.mensajes_respondidos)}}% </h5>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-6">
+                <span>Tasa de respuesta</span>
+              </div>
+              <div class="col-sm-6 text-right">
+                <h5 class="text-muted">{{getPorcentaje(canal.mensajes_respondidos, ultimaCampania.mensajes_entregados_ws)}}% </h5>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-6">
+                <span>Tasa de lectura</span>
+              </div>
+              <div class="col-sm-6 text-right">
+                <h5 class="text-muted">{{getPorcentaje(canal.mensajes_leidos, ultimaCampania.mensajes_entregados_ws)}}%</h5>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-6">
+                <span>Tasa de entrega</span>
+              </div>
+              <div class="col-sm-6 text-right">
+                <h5 class="text-muted">{{getPorcentaje(canal.mensajes_entregados, ultimaCampania.mensajes_enviados)}}%</h5>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-6">
+                <span>Tasa de rebote</span>
+              </div>
+              <div class="col-sm-6 text-right">
+                <h5 class="text-muted">{{getPorcentaje(canal.mensajes_rebotados, ultimaCampania.mensajes_enviados)}}%</h5>
+              </div>
+            </div>
+            <hr>
+            <!-- <app-apex-chart chartID="analytics-apex-user-chart" [chartConfig]="this.chartDB.userAACC"></app-apex-chart> -->
+          </app-card>
+        </div>
+      </div>
+    </app-card>
+  </div>
+  <div class="col-xl-4">
+    <app-card [hidHeader]="true">
+      <div class="row">
+        <div class="col-auto">
+          <h6>Veces enviados por canales</h6>
+        </div>
+        <div class="col text-right">
+          <h3 class="mb-0">{{totalCanales}}</h3>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col" *ngFor="let canal of canalesTotales; let i = index;">
+          <h3 class="m-0"><i class="fas fa-circle  f-10 m-r-5" [ngClass]="{'text-success': i==0, 'text-danger': i==1}" ></i>{{getPorcentaje(canal.cantidad,totalCanales)}}%</h3>
+          <span class="ml-3">{{canal.nombre}}</span>
+        </div>
+        <!-- <div class="col">
+          <h3 class="m-0"><i class="fas fa-circle text-primary f-10 m-r-5"></i>{{mensajes.whatsapp}}</h3>
+          <span class="ml-3">WhatsApp</span>
+        </div> -->
+        
+      </div>
+      <app-chart-circular #chartCanales [id]="idChartCanal"   [datos]="canalesTotales"></app-chart-circular>
+      <!-- (sendTipo)="getTipo($event)" -->
+      
+      <!-- <div class="progressbar-stack mt-4">
+        <div *ngFor="let bar of deviceProgressBar" [ngStyle]="{width: bar.value + '%'}" class="float-left">
+          <ngb-progressbar [type]="bar.type" height="8px" [value]="100"></ngb-progressbar>
+        </div>
+      </div> -->
+    </app-card>
+    <app-card [hidHeader]="true">
+      <div class="row align-items-start">
+        <!-- <div class="col">
+          <h3 class="mb-0">{{totalIntereses}}</h3>
+        </div> -->
+        <div class="col-auto text-right">
+          <h6 class="">Intereses más inclinados por clientes</h6>
+        </div>
+      </div>
+      <!-- <div class="row mt-2">
+        <div class="col-sm-6">
+          <span class="d-block" *ngFor="let interes of getInteresesNombre(interesesTotales)"><i class="fas fa-circle text-c-green f-10 m-r-10"></i>India</span>
+          <span class="d-block"><i class="fas fa-circle text-c-red f-10 m-r-10"></i>France</span>
+          <span class="d-block"><i class="fas fa-circle text-c-blue f-10 m-r-10"></i>Other</span>
+        </div>
+        <div class="col-sm-6">
+          <span class="d-block"><i class="fas fa-circle text-c-yellow f-10 m-r-10"></i>United states</span>
+          <span class="d-block"><i class="fas fa-circle text-c-purple f-10 m-r-10"></i>United Kingdom</span>
+        </div>
+      </div> -->
+
+      <div class="progress mt-3" style="height:20px;">
+        <div class="progress-bar rounded" *ngFor="let interes of interesesTotales; let index = index;" [ngClass]="{'badge-light-success': index === 0, 'badge-light-danger': index === 1, 'badge-light-primary': index === 2, 'badge-light-warning': index === 3, 'badge-light-info': index === 4}" [ngStyle]="{'width': getPorcentaje(interes.cantidad,totalIntereses)+'%'}"  role="progressbar"  aria-valuemin="0" aria-valuemax="100"><small>{{getPorcentaje(interes.cantidad,totalIntereses)}}%</small></div>
+        <!-- <div class="progress-bar badge-light-danger rounded" role="progressbar" style="width: 25%;"  aria-valuemin="0" aria-valuemax="100">12%</div>
+        <div class="progress-bar badge-light-primary rounded" role="progressbar" style="width: 20%;"  aria-valuemin="0" aria-valuemax="100">10%</div>
+        <div class="progress-bar badge-light-warning rounded" role="progressbar" style="width: 15%;"  aria-valuemin="0" aria-valuemax="100">8%</div>
+        <div class="progress-bar badge-light-info rounded" role="progressbar" style="width: 25%;" aria-valuemin="0" aria-valuemax="100">35%</div> -->
+      </div>
+      <app-chart-circular class="mt-3" #chartIntereses [id]="idChartInteres"   [datos]="interesesTotales"></app-chart-circular>
+    </app-card>
+  </div>
+  <div class="col-md-12">
+    <app-card cardTitle="Monitoreo de campañas" [options]="false" cardClass="table-card" blockClass="p-0">
+      <perfect-scrollbar [style.max-height]="'362px'">
+        <table class="table table-hover m-b-0">
+          <thead>
+            <tr>
+              <th><span>Campaña</span></th>
+              <th><span>Fecha</span></th>
+              <th>
+                
+                <span>Tasa de interesados
+                  
+                  <a class="help"
+                  [placement]="'bottom'" ngbPopover="Tasa de interesados (%) = número de mensajes con respuesta positiva / número de mensajes respondidos * 100" data-original-title="Tasa de interesados (%) = número de mensajes con respuesta positiva / número de mensajes respondidos * 100"><i class="feather icon-help-circle f-16"
+                   
+                    ></i></a>
+                </span>
+              </th>
+              <th>
+                <span>Tasa de rebote
+                  <a class="help" [placement]="'bottom'" ngbPopover="Tasa de rebote (%) = número de mensajes rebotados / número de mensajes enviados * 100" data-original-title="Tasa de interesados (%) = número de mensajes rebotados / número de mensajes enviados * 100"><i class="feather icon-help-circle f-16"></i></a>
+                </span>
+              </th>
+              <th>
+                <span>Tasa de entrega
+                  <a class="help" [placement]="'bottom'" ngbPopover="Tasa de entrega (%) = número de mensajes con entregados con éxito / número de mensajes enviados * 100" data-original-title="Tasa de interesados (%) = número de mensajes entregados con éxito / número de mensajes enviados * 100"><i class="feather icon-help-circle f-16"></i></a>
+                </span>
+              </th>
+              <th>
+                <span>Tasa de lectura (*solo WhatsApp)
+                  <a class="help" [placement]="'bottom'" ngbPopover="Tasa de lectura o apertura (%)= número de aperturas del mensaje / número de mensajes entregados * 100" data-original-title="Tasa de lectura o apertura (%)= número de aperturas del mensaje / número de mensajes entregados * 100"><i class="feather icon-help-circle f-16"></i></a>
+                </span>
+              </th>
+              <th>
+                <span>Tasa de respuesta (*solo WhatsApp)
+                  <a class="help" [placement]="'bottom'" ngbPopover="Tasa de respuesta (%)= número de mensajes respondidos / número de mensajes entregados * 100" data-original-title="Tasa de respuesta (%)= número de mensajes respondidos / número de mensajes entregados * 100"><i class="feather icon-help-circle f-16"></i></a>
+                </span>
+              </th>
+             
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let campania of campanias">
+              <td>{{campania.nombre}}</td>
+              <td>{{campania.fecha_inicio_seguimiento | date}}</td>
+              <td>
+                {{getPorcentaje(campania.usuarios_interesados, campania.mensajes_respondidos)}}%
+                <div class="mt-1">
+                  <ngb-progressbar type="primary" height="4px" [value]="getPorcentaje(campania.usuarios_interesados, campania.mensajes_respondidos)"></ngb-progressbar>
+                </div>
+              </td>
+              <td>
+                {{getPorcentaje(campania.mensajes_rebotados, campania.mensajes_enviados)}}%
+                <div class="mt-1">
+                  <ngb-progressbar type="info" height="4px" [value]="getPorcentaje(campania.mensajes_rebotados, campania.mensajes_enviados)"></ngb-progressbar>
+                </div>
+              </td>
+              <td>
+                {{getPorcentaje(campania.mensajes_entregados, campania.mensajes_enviados)}}%
+                <div class="mt-1">
+                  <ngb-progressbar type="primary" height="4px" [value]="getPorcentaje(campania.mensajes_entregados, campania.mensajes_enviados)"></ngb-progressbar>
+                </div>
+              </td>
+              <td>
+                <div class="mt-1">
+                  {{getPorcentaje(campania.mensajes_leidos, campania.mensajes_entregados_ws)}}%
+                  <ngb-progressbar type="warning" height="4px" [value]="getPorcentaje(campania.mensajes_leidos, campania.mensajes_entregados_ws)"></ngb-progressbar>
+                </div>
+              </td>
+              <td>
+                {{getPorcentaje(campania.mensajes_respondidos, campania.mensajes_entregados_ws)}}%
+                <div class="mt-1">
+                  <ngb-progressbar type="success" height="4px" [value]="getPorcentaje(campania.mensajes_respondidos, campania.mensajes_entregados_ws)"></ngb-progressbar>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </perfect-scrollbar>
+    </app-card>
+  </div>
+</div>
+
+<ng-template #popContent>
+  <div>
+      <button> Cancel </button>
+  </div>
+</ng-template>

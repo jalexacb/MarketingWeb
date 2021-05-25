@@ -1,0 +1,31 @@
+<ngx-spinner [name]="spinner1" [fullScreen]="false" type="ball-clip-rotate-pulse" size="medium"></ngx-spinner>
+<div class="modal-header">
+    <h4 class="modal-title">Editar Roles</h4>
+    <button type="button" class="close" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+   
+    <div class="row">
+      
+      <div class="col-sm-7">
+        <form action="javascript:" class="was-validated">
+          
+          <label for="inputEmail4">Rol</label>
+          <input type="email" class="form-control" name="rol" required [(ngModel)]="rol.nombre" id="inputEmail4" placeholder="Usuario">
+          <div class="valid-feedback">Válido.</div>
+          <div class="invalid-feedback">Campo obligatorio.</div>
+        </form>
+      </div>
+    </div>
+    
+    
+  </div>
+  <div class="modal-footer">
+    <div class="row">
+      <button type=" button" class="btn btn-primary" [disabled]="!isValidForm()" (click)="onSubmit()">Editar</button>
+    <button type="button" class="btn btn-outline-dark" (click)="bsModalRef.hide()">Cancelar</button>
+    </div>
+    
+  </div>
